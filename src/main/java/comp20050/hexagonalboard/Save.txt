@@ -1,0 +1,15 @@
+Save function would by called by pressing button "Save" in game
+
+@FXML
+    public void save(MouseEvent event) {
+        try {
+            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("/comp20050/hexagonalboard/save.dat"));
+
+
+
+
+
+        } catch (java.lang.Exception e) {
+            System.out.println("Save exception");
+        }
+    }
