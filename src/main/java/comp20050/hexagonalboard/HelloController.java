@@ -1,12 +1,17 @@
 package comp20050.hexagonalboard;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import static javafx.scene.paint.Color.BLACK;
@@ -145,12 +150,184 @@ public class HelloController {
         assert hex126 != null : "fx:id=\"hex126\" was not injected: check your FXML file 'hello-view.fxml'.";
         assert hex127 != null : "fx:id=\"hex127\" was not injected: check your FXML file 'hello-view.fxml'.";
 
+
+        hexagons.add(hex1);
+        hexagons.add(hex2);
+        hexagons.add(hex3);
+        hexagons.add(hex4);
+        hexagons.add(hex5);
+        hexagons.add(hex6);
+        hexagons.add(hex7);
+        hexagons.add(hex8);
+        hexagons.add(hex9);
+        hexagons.add(hex10);
+        hexagons.add(hex11);
+        hexagons.add(hex12);
+        hexagons.add(hex13);
+        hexagons.add(hex14);
+        hexagons.add(hex15);
+        hexagons.add(hex16);
+        hexagons.add(hex17);
+        hexagons.add(hex18);
+        hexagons.add(hex19);
+        hexagons.add(hex20);
+        hexagons.add(hex21);
+        hexagons.add(hex22);
+        hexagons.add(hex23);
+        hexagons.add(hex24);
+        hexagons.add(hex25);
+        hexagons.add(hex26);
+        hexagons.add(hex27);
+        hexagons.add(hex28);
+        hexagons.add(hex29);
+        hexagons.add(hex30);
+        hexagons.add(hex31);
+        hexagons.add(hex32);
+        hexagons.add(hex33);
+        hexagons.add(hex34);
+        hexagons.add(hex35);
+        hexagons.add(hex36);
+        hexagons.add(hex37);
+        hexagons.add(hex38);
+        hexagons.add(hex39);
+        hexagons.add(hex40);
+        hexagons.add(hex41);
+        hexagons.add(hex42);
+        hexagons.add(hex43);
+        hexagons.add(hex44);
+        hexagons.add(hex45);
+        hexagons.add(hex46);
+        hexagons.add(hex47);
+        hexagons.add(hex48);
+        hexagons.add(hex49);
+        hexagons.add(hex50);
+        hexagons.add(hex51);
+        hexagons.add(hex52);
+        hexagons.add(hex53);
+        hexagons.add(hex54);
+        hexagons.add(hex55);
+        hexagons.add(hex56);
+        hexagons.add(hex57);
+        hexagons.add(hex58);
+        hexagons.add(hex59);
+        hexagons.add(hex60);
+        hexagons.add(hex61);
+        hexagons.add(hex62);
+        hexagons.add(hex63);
+        hexagons.add(hex64);
+        hexagons.add(hex65);
+        hexagons.add(hex66);
+        hexagons.add(hex67);
+        hexagons.add(hex68);
+        hexagons.add(hex69);
+        hexagons.add(hex70);
+        hexagons.add(hex71);
+        hexagons.add(hex72);
+        hexagons.add(hex73);
+        hexagons.add(hex74);
+        hexagons.add(hex75);
+        hexagons.add(hex76);
+        hexagons.add(hex77);
+        hexagons.add(hex78);
+        hexagons.add(hex79);
+        hexagons.add(hex80);
+        hexagons.add(hex81);
+        hexagons.add(hex82);
+        hexagons.add(hex83);
+        hexagons.add(hex84);
+        hexagons.add(hex85);
+        hexagons.add(hex86);
+        hexagons.add(hex87);
+        hexagons.add(hex88);
+        hexagons.add(hex89);
+        hexagons.add(hex90);
+        hexagons.add(hex91);
+        hexagons.add(hex92);
+        hexagons.add(hex93);
+        hexagons.add(hex94);
+        hexagons.add(hex95);
+        hexagons.add(hex96);
+        hexagons.add(hex97);
+        hexagons.add(hex98);
+        hexagons.add(hex99);
+        hexagons.add(hex100);
+        hexagons.add(hex101);
+        hexagons.add(hex102);
+        hexagons.add(hex103);
+        hexagons.add(hex104);
+        hexagons.add(hex105);
+        hexagons.add(hex106);
+        hexagons.add(hex107);
+        hexagons.add(hex108);
+        hexagons.add(hex109);
+        hexagons.add(hex110);
+        hexagons.add(hex111);
+        hexagons.add(hex112);
+        hexagons.add(hex113);
+        hexagons.add(hex114);
+        hexagons.add(hex115);
+        hexagons.add(hex116);
+        hexagons.add(hex117);
+        hexagons.add(hex118);
+        hexagons.add(hex119);
+        hexagons.add(hex120);
+        hexagons.add(hex121);
+        hexagons.add(hex122);
+        hexagons.add(hex123);
+        hexagons.add(hex124);
+        hexagons.add(hex125);
+        hexagons.add(hex126);
+        hexagons.add(hex127);
+
+        for(Polygon hexagon : hexagons){
+            hexagon.setFill(Color.GREY);
+        }
+    }
+
+    //used for calling PlayerTurn in HelloApplication class from getHexID
+    private HelloApplication app;
+    public void setApp(HelloApplication app) {
+        this.app = app;
     }
 
     @FXML
     void getHexID(MouseEvent event) {
-        Polygon hexagon = (Polygon) event.getSource();
-        hexagon.setFill(BLACK);
+
+        Node click = (Node) event.getTarget();
+
+        //ensure you click a hexagon
+        if(click instanceof Polygon hexagon) {
+            Paint fill = hexagon.getFill();
+
+            //ensure hexagon is empty
+            if(fill.equals(Color.GREY)) {
+                String hexid = hexagon.getId();
+                System.out.println("Hexagon ID: " + hexid);
+
+                //this stops getHexID being called again for parent AnchorPane
+                //ensures getHexID is only called once for actual hexagon object clicked
+                event.consume();
+
+                //calls PlayerTurn() off reference to HelloApplication
+                if(app != null) {
+                    app.playerTurn(hexagon);
+                }
+                else{
+                    System.out.println("error");
+                }
+            }
+
+            else{
+                //make button to show this
+                System.out.println("Choose an empty Hexagon");
+                event.consume();
+            }
+        }
+
+        else{
+            System.out.println("INVALID: must click on a hexagon");
+            event.consume();
+        }
     }
 
     @FXML // fx:id="hex1"
@@ -533,4 +710,11 @@ public class HelloController {
 
     @FXML
     private Polygon hex127;
+
+    List<Polygon> hexagons = new ArrayList<>();
+
+    public List<Polygon> getHexagons() {
+        return hexagons;
+    }
+
 }
