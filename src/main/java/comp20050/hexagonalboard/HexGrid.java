@@ -15,7 +15,7 @@ public class HexGrid extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.setColor(Color.BLUE);
+        g.setColor(Color.LIGHT_GRAY);
 
         for (ArrayList<Point> hexagon : grid) {
             for (Point p : hexagon) {
