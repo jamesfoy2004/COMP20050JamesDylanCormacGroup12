@@ -1,5 +1,6 @@
 package comp20050.hexagonalboard;
 
+import javafx.scene.control.MenuButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -23,6 +24,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class HelloApplication extends Application {
+    Button quitButton;
+    MenuButton menuButton;
     Button button;
 
     //red turn and blue turn pop-ups

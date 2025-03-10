@@ -330,6 +330,76 @@ public class HelloController {
         }
     }
 
+    private boolean checkNonCapturingMove(Polygon hexagon) {
+        List<Polygon> neighbors = getNeighborHexagons(hexagon); // Get adjacent hexagons
+
+        boolean hasFriendlyNeighbors = false;
+        boolean hasOpponentNeighbors = false;
+
+        // Iterate through each neighbouring hexagon
+
+        for (Polygon neighbor : neighbors) {
+            Paint fill = neighbor.getFill();
+
+            if (fill.equals(Color.RED) && app.isRedTurn()) {
+                hasFriendlyNeighbors = true; //RED with RED neighbour
+            } else if (fill.equals(Color.BLUE) && !app.isRedTurn()) {
+                hasFriendlyNeighbors = true; //BLUE with BLUE neighbour
+            } else if (fill.equals(Color.RED) || fill.equals(Color.BLUE)) {
+                hasOpponentNeighbors = true; //User's placement is connecting to opponents stone
+            }
+        }
+
+        return !hasFriendlyNeighbors || (hasOpponentNeighbors && !hasFriendlyNeighbors);
+
+        //NCP: No neighbours of player's own store or only has neighbours of opponent's colour
+    }
+
+    //Gets neighbour for given hexagon
+    private List<Polygon> getNeighborHexagons(Polygon hexagon) {
+        List<Polygon> neighbors = new ArrayList<>();
+        int index = hexagons.indexOf(hexagon);
+
+        if (index == -1) return neighbors; // Empty if no hexagon found
+
+        // Convert index to HexCube co-ordinates
+        HexCube hex = getHexCubeFromIndex(index);
+
+        // Find positions of neighbouring hexagons
+        for (int i = 0; i < 6; i++) { //Any hexagon will have up to 6 neighbours
+            HexCube neighborHex = hex.neighbor(i);
+            Polygon neighborPolygon = getHexagonFromCube(neighborHex); //Get corresponding polygon
+
+            if (neighborPolygon != null) {
+                neighbors.add(neighborPolygon);
+            }
+        }
+
+        return neighbors;
+    }
+
+    //Converts a hexagon's index into HexCube coordinate system.
+    private HexCube getHexCubeFromIndex(int index) {
+        int row = index / 7;
+        int col = index % 7;
+        int q = col - 3; // Shift to center
+        int r = row - 3; // Shift to center
+        int s = -q - r;
+        return new HexCube(q, r, s);
+    }
+
+    //Finds Polygon hexagon corresponding to a given HexCube co-ordinate.
+    private Polygon getHexagonFromCube(HexCube hex) {
+        for (int i = 0; i < hexagons.size(); i++) {
+            HexCube current = getHexCubeFromIndex(i); //Convert index to HexCube co-ordinates.
+            if (current.q == hex.q && current.r == hex.r && current.s == hex.s) {
+                return hexagons.get(i); //Return matching hexagon
+            }
+        }
+        return null;
+    }
+
+
     @FXML // fx:id="hex1"
     private Polygon hex1; // Value injected by FXMLLoader
 
