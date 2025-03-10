@@ -1,0 +1,16 @@
+Index: src/main/java/comp20050/hexagonalboard/HelloApplication.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package comp20050.hexagonalboard;\r\n\r\nimport javafx.application.Application;\r\nimport javafx.stage.Stage;\r\nimport javafx.scene.Scene;\r\nimport javafx.scene.control.Button;\r\nimport javafx.scene.control.Alert;\r\nimport javafx.scene.control.Alert.AlertType;\r\nimport javafx.scene.control.ButtonType;\r\nimport javafx.scene.layout.AnchorPane;\r\nimport javafx.fxml.FXMLLoader;\r\nimport javafx.scene.transform.Scale;\r\nimport java.io.IOException;\r\n\r\npublic class HelloApplication extends Application {\r\n    Button button;\r\n    @Override\r\n    public void start(Stage stage) throws IOException {\r\n        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(\"/comp20050/hexagonalboard/hello-view.fxml\"));;\r\n\r\n        button = new Button();\r\n        button.setStyle(\"-fx-background-color: yellow; -fx-text-fill: blue; -fx-border-colour: red; -fx-border-style: solid; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32\");\r\n        button.setText(\"Quit\");\r\n        button.setPrefHeight(200);\r\n        button.setPrefWidth(400);\r\n        button.setOnAction(event -> {\r\n            Alert alert = new Alert(AlertType.CONFIRMATION);\r\n            alert.setTitle(\"Quit Confirmation\");\r\n            alert.setHeaderText(null);\r\n            alert.setContentText(\"Are you sure you want to quit?\");\r\n            ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);\r\n            if (result == ButtonType.YES) {\r\n                //save to file\r\n                stage.close();\r\n                //quit application\r\n        }});\r\n\r\n        AnchorPane root = fxmlLoader.load();\r\n        root.getChildren().add(button);\r\n        AnchorPane.setLeftAnchor(button, 0.0);\r\n        AnchorPane.setBottomAnchor(button, 10.0);\r\n        AnchorPane container = new AnchorPane();\r\n        container.getChildren().add(root);\r\n\r\n        Scene scene = new Scene(container, 800, 700);\r\n\r\n        Scale scale = new Scale(0.5, 0.5);\r\n        root.getTransforms().add(scale);\r\n\r\n        root.setTranslateX(50);\r\n        root.setTranslateY(0);\r\n\r\n        stage.setTitle(\"HexOust\");\r\n        stage.setScene(scene);\r\n        stage.show();\r\n    }\r\n\r\n    public static void main(String[] args) {\r\n        launch();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/comp20050/hexagonalboard/HelloApplication.java b/src/main/java/comp20050/hexagonalboard/HelloApplication.java
+--- a/src/main/java/comp20050/hexagonalboard/HelloApplication.java	(revision 1ba0e80cbaf7f275bbfd046e81a42e6eee143198)
++++ b/src/main/java/comp20050/hexagonalboard/HelloApplication.java	(date 1741554666406)
+@@ -1,5 +1,4 @@
+ package comp20050.hexagonalboard;
+-
+ import javafx.application.Application;
+ import javafx.stage.Stage;
+ import javafx.scene.Scene;
