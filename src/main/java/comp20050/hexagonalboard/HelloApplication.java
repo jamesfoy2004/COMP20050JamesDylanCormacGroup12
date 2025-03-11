@@ -16,14 +16,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
-import javafx.scene.control.MenuButton;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import java.io.IOException;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 
 public class HelloApplication extends Application {
@@ -54,8 +52,11 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/comp20050/hexagonalboard/hello-view.fxml"));
-        File imageFile = new File("src/main/java/comp20050/hexagonalboard/WhatsApp Image 2025-03-03 at 20.40.55.jpeg");
-        Image image = new Image(new FileInputStream(imageFile));
+        InputStream imageStream = getClass().getResourceAsStream("/comp20050/hexagonalboard/splash.png");
+        if (imageStream == null) {
+            throw new IOException("Splash image not found!");
+        }
+        Image image = new Image(imageStream);
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(800);
         imageView.setFitHeight(700);
