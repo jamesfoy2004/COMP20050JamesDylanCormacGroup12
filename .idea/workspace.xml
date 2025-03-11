@@ -9,11 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="The main funjctioin toi make the jar that we somehow deleted">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/WhatsApp Image 2025-03-03 at 20.40.55.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/splash.png" afterDir="false" />
-    </list>
+    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Fixed jar nopt loading issues" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,6 +89,11 @@
     ]
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\corma\Desktop\2.2\Algorithms\Assignments\Ass3\COMP20050JamesDylanCormacGroup12\src\main\resources\comp20050\hexagonalboard" />
+    </key>
+  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloApplication" />
@@ -183,7 +184,7 @@
       <workItem from="1741650213031" duration="16000" />
       <workItem from="1741650390691" duration="2000" />
       <workItem from="1741650909883" duration="60000" />
-      <workItem from="1741651005413" duration="309000" />
+      <workItem from="1741651005413" duration="456000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />
@@ -233,7 +234,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741649156193</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Fixed jar nopt loading issues">
+      <option name="closed" value="true" />
+      <created>1741651408820</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1741651408820</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -243,7 +252,8 @@
     <MESSAGE value="Added the quit button with a little bit of quick logic" />
     <MESSAGE value="Quit Button" />
     <MESSAGE value="The main funjctioin toi make the jar that we somehow deleted" />
-    <option name="LAST_COMMIT_MESSAGE" value="The main funjctioin toi make the jar that we somehow deleted" />
+    <MESSAGE value="Fixed jar nopt loading issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed jar nopt loading issues" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
