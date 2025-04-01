@@ -2,6 +2,8 @@ package comp20050.hexagonalboard;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -9,12 +11,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
-
-import static javafx.scene.paint.Color.BLACK;
 
 public class HelloController {
     @FXML
@@ -281,7 +279,16 @@ public class HelloController {
 
         for(Polygon hexagon : hexagons){
             hexagon.setFill(Color.GREY);
+
+            hexagon.setUserData(true);
+
+            hexagon.setOnMouseEntered(event -> hexHoverHandler(event));
+            hexagon.setOnMouseExited(event -> hexExit(event));
+
         }
+
+
+
     }
 
     //used for calling PlayerTurn in HelloApplication class from getHexID
@@ -289,6 +296,105 @@ public class HelloController {
     public void setApp(HelloApplication app) {
         this.app = app;
     }
+
+    private ImageView iviewTick;
+    private ImageView iviewX;
+
+
+
+    void hexHoverHandler(MouseEvent event) {
+        Node hover = (Node) event.getTarget();
+
+        if(hover instanceof Polygon hexagon) {
+            checkValidity(hexagon);
+
+
+            boolean validPlacement = (boolean) hexagon.getUserData();
+
+            if (validPlacement) {
+                hexHoverTick(event);
+            } else if (!validPlacement) {
+                hexHoverX(event);
+            }
+        }
+    }
+
+
+    void hexHoverTick(MouseEvent event){
+
+        Node hover = (Node) event.getTarget();
+
+        if(hover instanceof Polygon hexagon){
+            if(hexagon.getFill().equals(Color.GREY)){
+                Image imageTick = new Image(getClass().getResourceAsStream("tick.png"));
+                iviewTick = new ImageView(imageTick);
+
+                iviewTick.setFitWidth(50);
+                iviewTick.setFitHeight(50);
+                iviewTick.setPreserveRatio(true);
+
+                double centerX = hexagon.getBoundsInParent().getCenterX();
+                double centerY = hexagon.getBoundsInParent().getCenterY();
+
+                iviewTick.setLayoutX(centerX - iviewTick.getFitWidth() / 2);
+                iviewTick.setLayoutY(centerY - iviewTick.getFitHeight() / 2);
+
+                iviewTick.setMouseTransparent(true);
+                AnchorPane parent = (AnchorPane) hexagon.getParent();
+                parent.getChildren().add(iviewTick);
+            }
+        }
+    }
+
+
+
+    void hexHoverX(MouseEvent event){
+
+        Node hover = (Node) event.getTarget();
+
+        if(hover instanceof Polygon hexagon){
+            if(hexagon.getFill().equals(Color.GREY)){
+                Image imageX = new Image(getClass().getResourceAsStream("x.png"));
+                iviewX = new ImageView(imageX);
+
+                iviewX.setFitWidth(50);
+                iviewX.setFitHeight(50);
+                iviewX.setPreserveRatio(true);
+
+                double centerX = hexagon.getBoundsInParent().getCenterX();
+                double centerY = hexagon.getBoundsInParent().getCenterY();
+
+                iviewX.setLayoutX(centerX - iviewX.getFitWidth() / 2);
+                iviewX.setLayoutY(centerY - iviewX.getFitHeight() / 2);
+
+                iviewX.setMouseTransparent(true);
+                AnchorPane parent = (AnchorPane) hexagon.getParent();
+                parent.getChildren().add(iviewX);
+            }
+        }
+    }
+
+    void hexExit(MouseEvent event){
+        Node exit = (Node) event.getTarget();
+
+        if(exit instanceof Polygon hexagon){
+            AnchorPane parent = (AnchorPane) hexagon.getParent();
+
+            if (iviewTick != null && parent.getChildren().contains(iviewTick)) {
+                parent.getChildren().remove(iviewTick);
+                iviewTick = null;
+            }
+
+            if (iviewX != null && parent.getChildren().contains(iviewX)) {
+                parent.getChildren().remove(iviewX);
+                iviewX = null;
+            }
+        }
+    }
+
+
+
+
 
     @FXML
     void getHexID(MouseEvent event) {
@@ -350,10 +456,20 @@ public class HelloController {
             }
         }
 
+
         return !hasFriendlyNeighbors || (hasOpponentNeighbors && !hasFriendlyNeighbors);
 
         //NCP: No neighbours of player's own store or only has neighbours of opponent's colour
     }
+
+    private void checkValidity(Polygon hexagon) {
+
+        //  if(it is an invalid move){
+        //      hexagon.setUserData(false);
+        //  }
+
+    }
+
 
     //Gets neighbour for given hexagon
     private List<Polygon> getNeighborHexagons(Polygon hexagon) {
