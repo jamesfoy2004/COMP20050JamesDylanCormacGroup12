@@ -18,6 +18,8 @@ public class HelloController {
     @FXML
     private AnchorPane hexBoardPane;
 
+    private List<HexCube> boardHexCubes = new ArrayList<>();
+
     @FXML
     public void initialize() {
         assert hex1 != null : "fx:id=\"hex1\" was not injected: check your FXML file 'hello-view.fxml'.";
@@ -277,7 +279,7 @@ public class HelloController {
         hexagons.add(hex126);
         hexagons.add(hex127);
 
-        for(Polygon hexagon : hexagons){
+        for (Polygon hexagon : hexagons) {
             hexagon.setFill(Color.GREY);
 
             hexagon.setUserData(true);
@@ -287,12 +289,11 @@ public class HelloController {
 
         }
 
-
-
     }
 
     //used for calling PlayerTurn in HelloApplication class from getHexID
     private HelloApplication app;
+
     public void setApp(HelloApplication app) {
         this.app = app;
     }
@@ -301,11 +302,10 @@ public class HelloController {
     private ImageView iviewX;
 
 
-
     void hexHoverHandler(MouseEvent event) {
         Node hover = (Node) event.getTarget();
 
-        if(hover instanceof Polygon hexagon) {
+        if (hover instanceof Polygon hexagon) {
             checkValidity(hexagon);
 
 
@@ -320,12 +320,12 @@ public class HelloController {
     }
 
 
-    void hexHoverTick(MouseEvent event){
+    void hexHoverTick(MouseEvent event) {
 
         Node hover = (Node) event.getTarget();
 
-        if(hover instanceof Polygon hexagon){
-            if(hexagon.getFill().equals(Color.GREY)){
+        if (hover instanceof Polygon hexagon) {
+            if (hexagon.getFill().equals(Color.GREY)) {
                 Image imageTick = new Image(getClass().getResourceAsStream("tick.png"));
                 iviewTick = new ImageView(imageTick);
 
@@ -347,13 +347,12 @@ public class HelloController {
     }
 
 
-
-    void hexHoverX(MouseEvent event){
+    void hexHoverX(MouseEvent event) {
 
         Node hover = (Node) event.getTarget();
 
-        if(hover instanceof Polygon hexagon){
-            if(hexagon.getFill().equals(Color.GREY)){
+        if (hover instanceof Polygon hexagon) {
+            if (hexagon.getFill().equals(Color.GREY)) {
                 Image imageX = new Image(getClass().getResourceAsStream("x.png"));
                 iviewX = new ImageView(imageX);
 
@@ -374,10 +373,10 @@ public class HelloController {
         }
     }
 
-    void hexExit(MouseEvent event){
+    void hexExit(MouseEvent event) {
         Node exit = (Node) event.getTarget();
 
-        if(exit instanceof Polygon hexagon){
+        if (exit instanceof Polygon hexagon) {
             AnchorPane parent = (AnchorPane) hexagon.getParent();
 
             if (iviewTick != null && parent.getChildren().contains(iviewTick)) {
@@ -393,81 +392,176 @@ public class HelloController {
     }
 
 
-
-
-
     @FXML
     void getHexID(MouseEvent event) {
 
         Node click = (Node) event.getTarget();
 
         //ensure you click a hexagon
-        if(click instanceof Polygon hexagon) {
+        if (click instanceof Polygon hexagon) {
             Paint fill = hexagon.getFill();
 
             //ensure hexagon is empty
-            if(fill.equals(Color.GREY)) {
-                String hexid = hexagon.getId();
-                System.out.println("Hexagon ID: " + hexid);
+            if (fill.equals(Color.GREY)) {
+                boolean isValidNCP = isValidNonCapturingMove(hexagon);
+                boolean isValidCP = isValidCapturingMove(hexagon);
 
-                //this stops getHexID being called again for parent AnchorPane
-                //ensures getHexID is only called once for actual hexagon object clicked
-                event.consume();
+                if (isValidNCP || isValidCP) {
+                    checkCaptures(hexagon); //clear opponents stones if surrounded
+                    String hexid = hexagon.getId();
+                    System.out.println("Hexagon ID: " + hexid);
 
-                //calls PlayerTurn() off reference to HelloApplication
-                if(app != null) {
-                    app.playerTurn(hexagon);
+                    //this stops getHexID being called again for parent AnchorPane
+                    //ensures getHexID is only called once for actual hexagon object clicked
+                    event.consume();
+
+                    //calls PlayerTurn() off reference to HelloApplication
+                    if (app != null) {
+                        app.playerTurn(hexagon);
+                    } else {
+                        System.out.println("error");
+                    }
+                } else {
+                    System.out.println("Invalid move — can't place here!");
+                    event.consume();
                 }
-                else{
-                    System.out.println("error");
-                }
-            }
-
-            else{
+            } else {
                 //make button to show this
                 System.out.println("Choose an empty Hexagon");
                 event.consume();
             }
-        }
-
-        else{
+        } else{
             System.out.println("INVALID: must click on a hexagon");
             event.consume();
         }
+
+
+    }
+    //check if any opponent groups are captured after valid move
+    public void checkCaptures(Polygon placedHex) {
+        Paint placedColor = placedHex.getFill();
+        Paint opponentColor = placedColor.equals(Color.RED) ? Color.BLUE : Color.RED;
+
+        // Check each neighboring hexagon
+        for (Polygon neighbor : getNeighborHexagons(placedHex)) {
+            if (neighbor.getFill().equals(opponentColor)) {
+                List<Polygon> group = new ArrayList<>();
+                if (isCapturedGroup(neighbor, opponentColor, new ArrayList<>(), group)) {
+                    //capture group by clearing them
+                    for (Polygon captured : group) {
+                        captured.setFill(Color.GREY);
+                    }
+                }
+            }
+        }
     }
 
-    private boolean checkNonCapturingMove(Polygon hexagon) {
-        List<Polygon> neighbors = getNeighborHexagons(hexagon); // Get adjacent hexagons
+    private boolean isCapturedGroup(Polygon current, Paint opponentColor, List<Polygon> visited, List<Polygon> group) {
+        if (visited.contains(current)) return true;
 
-        boolean hasFriendlyNeighbors = false;
-        boolean hasOpponentNeighbors = false;
+        visited.add(current);
+        group.add(current);
 
-        // Iterate through each neighbouring hexagon
-
-        for (Polygon neighbor : neighbors) {
+        for (Polygon neighbor : getNeighborHexagons(current)) {
             Paint fill = neighbor.getFill();
 
-            if (fill.equals(Color.RED) && app.isRedTurn()) {
-                hasFriendlyNeighbors = true; //RED with RED neighbour
-            } else if (fill.equals(Color.BLUE) && !app.isRedTurn()) {
-                hasFriendlyNeighbors = true; //BLUE with BLUE neighbour
-            } else if (fill.equals(Color.RED) || fill.equals(Color.BLUE)) {
-                hasOpponentNeighbors = true; //User's placement is connecting to opponents stone
+            if (fill.equals(Color.GREY)) {
+                return false;
+            }
+
+            if (fill.equals(opponentColor)) {
+                boolean result = isCapturedGroup(neighbor, opponentColor, visited, group);
+                if (!result) return false;
             }
         }
 
-
-        return !hasFriendlyNeighbors || (hasOpponentNeighbors && !hasFriendlyNeighbors);
-
-        //NCP: No neighbours of player's own store or only has neighbours of opponent's colour
+        return true; //fully surrounded
     }
 
+
+
+
+    private boolean isValidNonCapturingMove(Polygon hexagon) {
+        List<Polygon> neighbors = getNeighborHexagons(hexagon);
+
+        for (Polygon neighbor : neighbors) {
+            Paint fill = neighbor.getFill();
+            //not valid NCP if friendly neighbour is found
+            if (app.isRedTurn() && fill.equals(Color.RED)) return false;
+            if (!app.isRedTurn() && fill.equals(Color.BLUE)) return false;
+        }
+
+        return true; //only connects to empty or opponents stones
+    }
+
+    private boolean isValidCapturingMove(Polygon hexagon) {
+        Paint playerColor = app.isRedTurn() ? Color.RED : Color.BLUE;
+        Paint opponentColor = app.isRedTurn() ? Color.BLUE : Color.RED;
+
+        //make new group starting from placed hex
+        List<Polygon> newGroup = new ArrayList<>();
+        newGroup.add(hexagon);
+
+        //add all directly connected same colour hexagons to group
+        for (Polygon neighbor : getNeighborHexagons(hexagon)) {
+            if (neighbor.getFill().equals(playerColor)) {
+                expandGroup(neighbor, playerColor, newGroup);
+            }
+        }
+
+        int newGroupSize = newGroup.size();
+
+        //track all opponent groups
+        List<List<Polygon>> opponentGroups = new ArrayList<>();
+        // get adjacent opponent groups around new group
+        for (Polygon playerHex  : newGroup) {
+            for (Polygon neighbor : getNeighborHexagons(playerHex)) {
+                if (neighbor.getFill().equals(opponentColor)) {
+                    List<Polygon> group = new ArrayList<>();
+                    expandGroup(neighbor, opponentColor, group);
+
+                    if (!containsGroup(opponentGroups, group)) {
+                        opponentGroups.add(group);
+                    }
+                }
+            }
+        }
+
+        //must touch at least one opponent group
+        if (opponentGroups.isEmpty()) return false;
+
+        //all touched opponent groups must be smaller than new group
+        for (List<Polygon> group : opponentGroups) {
+            if (group.size() >= newGroupSize) return false;
+        }
+
+        return true;
+    }
+    //helper function: adds connected same colour hexes to group
+    private void expandGroup(Polygon start, Paint color, List<Polygon> group) {
+        if (group.contains(start)) return;
+        group.add(start);
+
+        for (Polygon neighbor : getNeighborHexagons(start)) {
+            if (neighbor.getFill().equals(color)) {
+                expandGroup(neighbor, color, group);
+            }
+        }
+    }
+    //check if group is already in list of existing group
+    private boolean containsGroup(List<List<Polygon>> groups, List<Polygon> newGroup) {
+        for (List<Polygon> g : groups) {
+            if (g.containsAll(newGroup) && newGroup.containsAll(g)) return true;
+        }
+        return false;
+    }
+
+
+
+
     private void checkValidity(Polygon hexagon) {
-
-        //  if(it is an invalid move){
-        //      hexagon.setUserData(false);
-        //  }
-
+        boolean isValid = isValidNonCapturingMove(hexagon) || isValidCapturingMove(hexagon);
+        hexagon.setUserData(isValid);
     }
 
 
@@ -514,7 +608,6 @@ public class HelloController {
         }
         return null;
     }
-
 
     @FXML // fx:id="hex1"
     private Polygon hex1; // Value injected by FXMLLoader
