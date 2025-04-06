@@ -10,11 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="In progress code for (in)valid placements and (non)capturing.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Save1.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -234,7 +231,7 @@
       <workItem from="1741650390691" duration="2000" />
       <workItem from="1741650909883" duration="60000" />
       <workItem from="1741651005413" duration="456000" />
-      <workItem from="1743974297082" duration="132000" />
+      <workItem from="1743974297082" duration="702000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />
@@ -292,7 +289,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741651408820</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="In progress code for (in)valid placements and (non)capturing.">
+      <option name="closed" value="true" />
+      <created>1743974455724</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1743974455724</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +320,8 @@
     <MESSAGE value="The main funjctioin toi make the jar that we somehow deleted" />
     <MESSAGE value="Fixed jar nopt loading issues" />
     <MESSAGE value="Saving to file (application in a randomly generated array) with mockito tests (commented out)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving to file (application in a randomly generated array) with mockito tests (commented out)" />
+    <MESSAGE value="In progress code for (in)valid placements and (non)capturing." />
+    <option name="LAST_COMMIT_MESSAGE" value="In progress code for (in)valid placements and (non)capturing." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
