@@ -9,7 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Fixed jar nopt loading issues" />
+    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="In progress code for (in)valid placements and (non)capturing.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Save1.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +51,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git",
-    "accountId": "d511ccd3-7e34-41ea-ad84-2ab38736b951"
+    "accountId": "54f0da74-26d5-40cd-be8c-88c4db287a0c"
   },
   "recentNewPullRequestHead": {
     "server": {
@@ -78,9 +84,13 @@
     "Application.PopUps.executor": "Run",
     "Application.SerialiseObjects.executor": "Run",
     "JAR Application.HexagonalBoard.jar.executor": "Run",
+    "JUnit.HelloControllerTest.executor": "Run",
+    "JUnit.HelloControllerTest.testCaptureSingleOpponentHex.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "#2 on JamesCapturing",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/corma/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll",
     "node.js.detected.package.eslint": "true",
@@ -88,7 +98,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Artifacts",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propCompiler",
@@ -106,7 +116,7 @@
       <recent name="C:\Users\corma\Desktop\2.2\Algorithms\Assignments\Ass3\COMP20050JamesDylanCormacGroup12\src\main\resources\comp20050\hexagonalboard" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SerialiseObjects">
+  <component name="RunManager" selected="JUnit.HelloControllerTest">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloApplication" />
       <module name="HexagonalBoard" />
@@ -133,19 +143,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PopUps" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.PopUps" />
-      <module name="HexagonalBoard" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SerialiseObjects" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.SerialiseObjects" />
       <module name="HexagonalBoard" />
@@ -159,25 +156,52 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HexagonalBoard.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/HexagonalBoard_jar/HexagonalBoard.jar" />
-      <method v="2" />
+    <configuration name="HelloControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HexagonalBoard" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="comp20050.hexagonalboard" />
+      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloControllerTest.testCaptureSingleOpponentHex" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HexagonalBoard" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="comp20050.hexagonalboard" />
+      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloControllerTest" />
+      <option name="METHOD_NAME" value="testCaptureSingleOpponentHex" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.HelloControllerTest" />
+        <item itemvalue="JUnit.HelloControllerTest.testCaptureSingleOpponentHex" />
+        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SerialiseObjects" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JAR Application.HexagonalBoard.jar" />
-        <item itemvalue="Application.HelloApplication" />
-        <item itemvalue="Application.PopUps" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -210,6 +234,7 @@
       <workItem from="1741650390691" duration="2000" />
       <workItem from="1741650909883" duration="60000" />
       <workItem from="1741651005413" duration="456000" />
+      <workItem from="1743974297082" duration="132000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />

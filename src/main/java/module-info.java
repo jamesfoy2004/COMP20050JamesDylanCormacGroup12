@@ -6,6 +6,7 @@ module comp20050.hexagonalboard {
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
     requires java.desktop;
+    requires org.junit.jupiter.api;
 
     opens comp20050.hexagonalboard to javafx.fxml;
     exports comp20050.hexagonalboard;
