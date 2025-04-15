@@ -1,6 +1,7 @@
 package comp20050.hexagonalboard;
 
 import javafx.fxml.FXML;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,9 @@ import javafx.scene.shape.Polygon;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.round;
+import static java.lang.Math.sqrt;
 
 public class HelloController {
     @FXML
@@ -289,6 +293,21 @@ public class HelloController {
 
         }
 
+        //Polygon hexagon = hexagons.get(0);
+        //AnchorPane parent = (AnchorPane) hexagon.getParent();
+
+        //Layout layout = new Layout(Layout.flat, new Point(45, 45), new Point(700, 700));
+
+        //parent.setOnMouseClicked(event -> {
+        //    double x = event.getX();
+        //    double y = event.getY();
+
+        //    Point click = new Point(x, y);
+        //    HexCube hex = layout.pixelToHex(click).hexRound();
+
+        //    System.out.println("Clicked hex: " + hex.q + "," + hex.r + "," + hex.s);
+        //});
+
     }
 
     //used for calling PlayerTurn in HelloApplication class from getHexID
@@ -397,8 +416,33 @@ public class HelloController {
 
         Node click = (Node) event.getTarget();
 
+
+
+
         //ensure you click a hexagon
         if (click instanceof Polygon hexagon) {
+
+            double scaleFactor = 0.5;
+
+            double sceneX = event.getSceneX();
+            double sceneY = event.getSceneY();
+
+
+            double x = (sceneX - 50) / scaleFactor;
+            double y = sceneY / scaleFactor;
+            System.out.println(x + " " + y);
+
+            double flipY = 1400 - y;
+
+
+
+            Layout layout = new Layout(Layout.flat, new Point(50, 51.96), new Point(700, 700));
+            Point pointClick = new Point(x, flipY);
+            HexCube hex = layout.pixelToHex(pointClick).hexRound();
+
+            System.out.println("Clicked hex: " + hex.q + "," + hex.r + "," + hex.s);
+
+
             Paint fill = hexagon.getFill();
 
             //ensure hexagon is empty

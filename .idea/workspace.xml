@@ -10,11 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="In progress code for (in)valid placements and (non)capturing.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Save1.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/FractionalHexCube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/FractionalHexCube.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,23 +47,23 @@
     &quot;assignee&quot;: &quot;c0rm1&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git",
-    "accountId": "54f0da74-26d5-40cd-be8c-88c4db287a0c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git&quot;,
+    &quot;accountId&quot;: &quot;89cfe1f3-5b12-4408-9b08-141195730aba&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "jamesfoy2004",
-    "repository": "COMP20050JamesDylanCormacGroup12"
+    &quot;owner&quot;: &quot;jamesfoy2004&quot;,
+    &quot;repository&quot;: &quot;COMP20050JamesDylanCormacGroup12&quot;
   },
-  "editorReviewEnabled": false
-}]]></component>
+  &quot;editorReviewEnabled&quot;: false
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -89,7 +88,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "qrsCoOrds",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/corma/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll",
@@ -116,7 +115,7 @@
       <recent name="C:\Users\corma\Desktop\2.2\Algorithms\Assignments\Ass3\COMP20050JamesDylanCormacGroup12\src\main\resources\comp20050\hexagonalboard" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HelloControllerTest">
+  <component name="RunManager" selected="Application.HelloApplication">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloApplication" />
       <module name="HexagonalBoard" />
@@ -189,9 +188,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="JUnit.HelloControllerTest" />
         <item itemvalue="JUnit.HelloControllerTest.testCaptureSingleOpponentHex" />
-        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SerialiseObjects" />
         <item itemvalue="Application.Main" />
       </list>
@@ -200,8 +199,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
       </set>
     </attachedChunks>
   </component>
@@ -235,6 +234,10 @@
       <workItem from="1741650909883" duration="60000" />
       <workItem from="1741651005413" duration="456000" />
       <workItem from="1743974297082" duration="132000" />
+      <workItem from="1744309458252" duration="1551000" />
+      <workItem from="1744374826671" duration="5263000" />
+      <workItem from="1744533691962" duration="3000" />
+      <workItem from="1744645130133" duration="14671000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />

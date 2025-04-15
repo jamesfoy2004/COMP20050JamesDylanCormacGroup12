@@ -22,7 +22,11 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.MenuItem;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+
+import static java.lang.Math.round;
+import static java.lang.Math.sqrt;
 
 public class HelloApplication extends Application {
     Button quitButton;
@@ -52,6 +56,25 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/comp20050/hexagonalboard/hello-view.fxml"));
+
+        int radius = 6; // or any size
+        ArrayList<ArrayList<Point>> hexagons = new ArrayList<>();
+
+        Layout layout = new Layout(Layout.flat, new Point(50, 51.96), new Point(700, 700));
+
+        for (int q = -radius; q <= radius; q++) {
+            for (int r = Math.max(-radius, -q - radius); r <= Math.min(radius, -q + radius); r++) {
+                int s = -q - r;
+                System.out.println(q + " " + s + " " + r);
+                HexCube cube = new HexCube(q, r, s);
+                ArrayList<Point> corners = layout.polygonCorners(cube);
+                hexagons.add(corners);
+            }
+        }
+
+
+
+
         InputStream imageStream = getClass().getResourceAsStream("/comp20050/hexagonalboard/splash.png");
         if (imageStream == null) {
             throw new IOException("Splash image not found!");
