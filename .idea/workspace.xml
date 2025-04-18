@@ -14,6 +14,7 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/FractionalHexCube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/FractionalHexCube.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexCube.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexCube.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +37,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="qrsCoOrds" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -88,7 +89,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "qrsCoOrds",
+    "git-widget-placeholder": "colour",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/corma/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll",
@@ -100,7 +101,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propCompiler",
+    "settings.editor.selected.configurable": "vcs.Git",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -189,8 +190,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.HelloApplication" />
-        <item itemvalue="JUnit.HelloControllerTest" />
         <item itemvalue="JUnit.HelloControllerTest.testCaptureSingleOpponentHex" />
+        <item itemvalue="JUnit.HelloControllerTest" />
         <item itemvalue="Application.SerialiseObjects" />
         <item itemvalue="Application.Main" />
       </list>

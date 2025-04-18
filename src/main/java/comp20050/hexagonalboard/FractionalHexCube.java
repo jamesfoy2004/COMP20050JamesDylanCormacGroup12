@@ -1,5 +1,7 @@
 package comp20050.hexagonalboard;
 
+import java.util.List;
+
 class FractionalHexCube
 {
     public FractionalHexCube(double q, double r, double s)
@@ -15,27 +17,29 @@ class FractionalHexCube
     public final double r;
     public final double s;
 
-    public HexCube hexRound()
-    {
-        int qi = (int)(Math.round(q));
-        int ri = (int)(Math.round(r));
-        int si = (int)(Math.round(s));
+    public HexCube hexRound(List<HexCube> hexcubes) {
+
+        int qi = (int) (Math.round(q));
+        int ri = (int) (Math.round(r));
+        int si = (int) (Math.round(s));
         double q_diff = Math.abs(qi - q);
         double r_diff = Math.abs(ri - r);
         double s_diff = Math.abs(si - s);
-        if (q_diff > r_diff && q_diff > s_diff)
-        {
+        if (q_diff > r_diff && q_diff > s_diff) {
             qi = -ri - si;
-        }
-        else
-        if (r_diff > s_diff)
-        {
+        } else if (r_diff > s_diff) {
             ri = -qi - si;
-        }
-        else
-        {
+        } else {
             si = -qi - ri;
         }
-        return new HexCube(qi, ri, si);
+
+        for (HexCube cube : hexcubes) {
+            if (cube.q == qi && cube.r == ri && cube.s == si) {
+                return cube;
+            }
+        }
+
+        throw new IllegalArgumentException("No HexCube found for coordinates (" + qi + ", " + ri + ", " + si + ")");
     }
+
 }

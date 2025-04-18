@@ -23,6 +23,7 @@ public class HelloController {
     private AnchorPane hexBoardPane;
 
     private List<HexCube> boardHexCubes = new ArrayList<>();
+    private List<HexCube> hexCubes;
 
     @FXML
     public void initialize() {
@@ -313,8 +314,9 @@ public class HelloController {
     //used for calling PlayerTurn in HelloApplication class from getHexID
     private HelloApplication app;
 
-    public void setApp(HelloApplication app) {
+    public void setApp(HelloApplication app, List<HexCube> hexCubes) {
         this.app = app;
+        this.hexCubes = hexCubes;
     }
 
     private ImageView iviewTick;
@@ -438,7 +440,7 @@ public class HelloController {
 
             Layout layout = new Layout(Layout.flat, new Point(50, 51.96), new Point(700, 700));
             Point pointClick = new Point(x, flipY);
-            HexCube hex = layout.pixelToHex(pointClick).hexRound();
+            HexCube hex = layout.pixelToHex(pointClick).hexRound(hexCubes);
 
             System.out.println("Clicked hex: " + hex.q + "," + hex.r + "," + hex.s);
 
@@ -639,7 +641,7 @@ public class HelloController {
         int q = col - 3; // Shift to center
         int r = row - 3; // Shift to center
         int s = -q - r;
-        return new HexCube(q, r, s);
+        return new HexCube(q, r, s, 0);
     }
 
     //Finds Polygon hexagon corresponding to a given HexCube co-ordinate.

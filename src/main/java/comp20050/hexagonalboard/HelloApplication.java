@@ -32,6 +32,8 @@ public class HelloApplication extends Application {
     Button quitButton;
     MenuButton menuButton;
 
+    ArrayList<HexCube> hexCubes;
+
     //red turn and blue turn pop-ups
     Button redButton;
     Button blueButton;
@@ -62,11 +64,14 @@ public class HelloApplication extends Application {
 
         Layout layout = new Layout(Layout.flat, new Point(50, 51.96), new Point(700, 700));
 
+        hexCubes = new ArrayList<HexCube>();
+
         for (int q = -radius; q <= radius; q++) {
             for (int r = Math.max(-radius, -q - radius); r <= Math.min(radius, -q + radius); r++) {
                 int s = -q - r;
                 System.out.println(q + " " + s + " " + r);
-                HexCube cube = new HexCube(q, r, s);
+                HexCube cube = new HexCube(q, r, s,0);
+                hexCubes.add(cube);
                 ArrayList<Point> corners = layout.polygonCorners(cube);
                 hexagons.add(corners);
             }
@@ -194,7 +199,7 @@ public class HelloApplication extends Application {
 
 
             HelloController controller = fxmlLoader.getController();
-            controller.setApp(this);
+            controller.setApp(this, hexCubes);
             hexagons = controller.getHexagons();
 
             //method which defines how long the pop-ups run

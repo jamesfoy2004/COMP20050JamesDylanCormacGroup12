@@ -14,12 +14,14 @@ public class HelloControllerTest {
 
     private HelloController controller;
     private HelloApplication app;
+    ArrayList<HexCube> hexCubes;
 
     @BeforeEach
     public void setup() {
         controller = new HelloController();
         app = new HelloApplication();
-        controller.setApp(app);
+        hexCubes = new ArrayList<HexCube>();
+        controller.setApp(app, hexCubes);
 
         // Setup fake board
         List<Polygon> hexagons = new ArrayList<>();
