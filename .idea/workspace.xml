@@ -9,18 +9,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Fixed jar nopt loading issues">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="ChangingBoard upon loading of game">
+      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexagonState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Save1.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Load.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveButton.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SerialisedObjectsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/SerialisedObjectsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/redBlueChanges.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +98,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "SDKs",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propCompiler",
@@ -127,7 +122,7 @@
       <recent name="comp20050.hexagonalboard" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.HelloControllerTest.testCaptureSingleOpponentHex">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.Main" />
       <module name="HexagonalBoard" />
@@ -189,9 +184,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.HelloControllerTest.testCaptureSingleOpponentHex" />
         <item itemvalue="Application.SerialiseObjects" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JAR Application.HexagonalBoard.jar" />
         <item itemvalue="Application.PopUps" />
       </list>
@@ -235,7 +230,7 @@
       <workItem from="1741650909883" duration="60000" />
       <workItem from="1741651005413" duration="456000" />
       <workItem from="1745165406716" duration="1848000" />
-      <workItem from="1745167365828" duration="4430000" />
+      <workItem from="1745167365828" duration="14168000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />
@@ -293,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741651408820</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="ChangingBoard upon loading of game">
+      <option name="closed" value="true" />
+      <created>1745172367311</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1745172367311</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,6 +319,7 @@
     <MESSAGE value="The main funjctioin toi make the jar that we somehow deleted" />
     <MESSAGE value="Fixed jar nopt loading issues" />
     <MESSAGE value="Saving to file (application in a randomly generated array) with mockito tests (commented out)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Saving to file (application in a randomly generated array) with mockito tests (commented out)" />
+    <MESSAGE value="ChangingBoard upon loading of game" />
+    <option name="LAST_COMMIT_MESSAGE" value="ChangingBoard upon loading of game" />
   </component>
 </project>

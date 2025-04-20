@@ -10,11 +10,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Polygon;
 
-
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class HelloController {
+
+    public static final String FILE_NAME = "Save1.ser";
+
     @FXML
     private AnchorPane hexBoardPane;
 
@@ -22,6 +25,7 @@ public class HelloController {
 
     @FXML
     public void initialize() {
+
         assert hex1 != null : "fx:id=\"hex1\" was not injected: check your FXML file 'hello-view.fxml'.";
         assert hex2 != null : "fx:id=\"hex2\" was not injected: check your FXML file 'hello-view.fxml'.";
         assert hex3 != null : "fx:id=\"hex3\" was not injected: check your FXML file 'hello-view.fxml'.";
@@ -279,29 +283,90 @@ public class HelloController {
         hexagons.add(hex126);
         hexagons.add(hex127);
 
-        for (int i = 0; i < hexagons.size(); i++) {
-            Polygon hexagon = hexagons.get(i);
+        for (Polygon hexagon : hexagons) {
+            HexState state = HexState.OFF;
+            hexagon.setUserData(state);
+            setHexagonColour(hexagon, state);
+        }
 
-            if (i % 2 == 0) {
-                // Set color for even index (optional: can be any color like Color.LIGHTBLUE)
-                hexagon.setFill(Color.LIGHTBLUE);  // Example: even-indexed hexagons set to Light Blue
-            } else {
-                // Set color to GREY for odd index
-                hexagon.setFill(Color.GREY);
-            }
-            //if (hexagon isnt captured)
-            //hexagon.setFill(Color.GREY);
-            //else if (hexagon is 1)
-            //setblue
-            //else setRed
+        HexagonState[] hexStates = new HexagonState[hexagons.size()];
+        for (int i = 0; i < hexagons.size(); i++) {
+            Polygon hexagon = (Polygon) hexagons.get(i);
+            String hexID = hexagon.getId();
+            HexState state = (HexState) hexagon.getUserData();
+            hexStates[i] = new HexagonState(hexID, state);
 
             hexagon.setUserData(true);
 
             hexagon.setOnMouseEntered(event -> hexHoverHandler(event));
             hexagon.setOnMouseExited(event -> hexExit(event));
-
         }
 
+    }
+
+    private static void saveBoard(HexagonState[] hexStates) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
+            oos.writeObject(hexStates);
+            System.out.println("Board saved successfully to " + new File(FILE_NAME).getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void saveBoardState() {
+        HexagonState[] hexStates = new HexagonState[hexagons.size()];
+        for (int i = 0; i < hexagons.size(); i++) {
+            Polygon hex = hexagons.get(i);
+            String hexID = hex.getId();
+            HexState state = (HexState) hex.getUserData();
+            hexStates[i] = new HexagonState(hexID, state);
+        }
+        saveBoard(hexStates);
+    }
+
+
+    private static HexagonState[] loadBoard() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
+            return (HexagonState[]) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void loadAndUpdateBoard() {
+        HexagonState[] loadedBoard = loadBoard();
+        if (loadedBoard != null) {
+            for (HexagonState state : loadedBoard) {
+                String hexID = state.getHexID();
+                HexState hexState = state.getState();
+
+                // Find the hexagon by ID and update its state and color
+                for (Polygon hexagon : hexagons) {
+                    if (hexagon.getId().equals(hexID)) {
+                        hexagon.setUserData(hexState);
+                        setHexagonColour(hexagon, hexState);
+                    }
+                }
+            }
+            System.out.println("Board loaded and updated successfully.");
+        }
+    }
+
+    private void setHexagonColour(Polygon hexagon, HexState state) {
+        state = (HexState) hexagon.getUserData();
+        switch (state) {
+            case PLAYER1:
+                hexagon.setFill(Color.YELLOW);
+                break;
+            case PLAYER2:
+                hexagon.setFill(Color.BLUE);
+                break;
+            case OFF:
+            default:
+                hexagon.setFill(Color.GREY);
+                break;
+        }
     }
 
     //used for calling PlayerTurn in HelloApplication class from getHexID
@@ -413,13 +478,16 @@ public class HelloController {
         //ensure you click a hexagon
         if (click instanceof Polygon hexagon) {
             Paint fill = hexagon.getFill();
+            HexState currentState = (HexState) hexagon.getUserData();
 
             //ensure hexagon is empty
-            if (fill.equals(Color.GREY)) {
+            if (currentState == HexState.OFF) {
                 boolean isValidNCP = isValidNonCapturingMove(hexagon);
                 boolean isValidCP = isValidCapturingMove(hexagon);
 
                 if (isValidNCP || isValidCP) {
+                    //HexState currentState = (HexState) hexagon.getUserData();//Toggle between off, player1 or player2
+                    hexagon.setUserData(HexState.PLAYER1);
                     checkCaptures(hexagon); //clear opponents stones if surrounded
                     String hexid = hexagon.getId();
                     System.out.println("Hexagon ID: " + hexid);
@@ -454,7 +522,6 @@ public class HelloController {
     public void checkCaptures(Polygon placedHex) {
         Paint placedColor = placedHex.getFill();
         Paint opponentColor = placedColor.equals(Color.RED) ? Color.BLUE : Color.RED;
-
         // Check each neighboring hexagon
         for (Polygon neighbor : getNeighborHexagons(placedHex)) {
             if (neighbor.getFill().equals(opponentColor)) {

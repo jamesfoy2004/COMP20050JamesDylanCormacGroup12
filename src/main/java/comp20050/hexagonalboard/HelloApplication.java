@@ -95,11 +95,24 @@ public class HelloApplication extends Application {
             menuButton.setPrefHeight(100);
             menuButton.setPrefWidth(200);
             MenuItem newGame = new MenuItem("New Game");
+            MenuItem saveGame = new MenuItem("Save Game");
             MenuItem loadGame = new MenuItem("Load Game");
             MenuItem changeTheme = new MenuItem("Change Theme");
             MenuItem quitMenuButton = new MenuItem("Quit");
             newGame.setOnAction(event -> showMessage("New Game Selected"));
-            loadGame.setOnAction(event -> showMessage("Load Game Selected"));
+
+            saveGame.setOnAction(event -> {
+                HelloController controller = fxmlLoader.getController();
+                controller.saveBoardState(); // You'll implement this
+                showMessage("Game Saved Successfully");
+            });
+
+            loadGame.setOnAction(event -> {
+                HelloController controller = fxmlLoader.getController();
+                controller.loadAndUpdateBoard(); // You'll implement this
+                showMessage("Game Loaded Successfully");
+            });
+
             changeTheme.setOnAction(event -> showMessage("Change Theme Selected"));
             quitMenuButton.setOnAction(event -> {
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -111,7 +124,7 @@ public class HelloApplication extends Application {
                     stage.close();
                 }
             });
-            menuButton.getItems().addAll(newGame, loadGame, changeTheme, quitMenuButton);
+            menuButton.getItems().addAll(newGame, saveGame, loadGame, changeTheme, quitMenuButton);
 
             AnchorPane root = fxmlLoader.load();
             root.getChildren().addAll(quitButton, menuButton);
