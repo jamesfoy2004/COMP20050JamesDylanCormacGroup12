@@ -279,8 +279,21 @@ public class HelloController {
         hexagons.add(hex126);
         hexagons.add(hex127);
 
-        for (Polygon hexagon : hexagons) {
-            hexagon.setFill(Color.GREY);
+        for (int i = 0; i < hexagons.size(); i++) {
+            Polygon hexagon = hexagons.get(i);
+
+            if (i % 2 == 0) {
+                // Set color for even index (optional: can be any color like Color.LIGHTBLUE)
+                hexagon.setFill(Color.LIGHTBLUE);  // Example: even-indexed hexagons set to Light Blue
+            } else {
+                // Set color to GREY for odd index
+                hexagon.setFill(Color.GREY);
+            }
+            //if (hexagon isnt captured)
+            //hexagon.setFill(Color.GREY);
+            //else if (hexagon is 1)
+            //setblue
+            //else setRed
 
             hexagon.setUserData(true);
 

@@ -1,7 +1,7 @@
 package comp20050.hexagonalboard;
 // NOTE: Issues with JUnit dependencies as well as incomplete game logic prevent these tests from working
 // in their current state. Currently exist as a model for unit tests in Sprint 4
-// Unknown what is causing JUnit conflict; perfomed clean install of JUnit 5.8.1 multiple times in IntelliJ
+// Unknown what is causing JUnit conflict; performed a clean installation of JUnit 5.8.1 multiple times in IntelliJ
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import org.junit.jupiter.api.BeforeEach;
@@ -51,6 +51,6 @@ public class HelloControllerTest {
         }
 
         controller.checkCaptures(center);
-        assertEquals(Color.GREY, target.getFill()); // captured
+        assertEquals(Color.RED, target.getFill()); // captured
     }
 }
