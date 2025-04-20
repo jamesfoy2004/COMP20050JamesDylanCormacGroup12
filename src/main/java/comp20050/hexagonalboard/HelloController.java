@@ -478,10 +478,9 @@ public class HelloController {
         //ensure you click a hexagon
         if (click instanceof Polygon hexagon) {
             Paint fill = hexagon.getFill();
-            HexState currentState = (HexState) hexagon.getUserData();
 
             //ensure hexagon is empty
-            if (currentState == HexState.OFF) {
+            if (fill.equals(Color.GREY)) {
                 boolean isValidNCP = isValidNonCapturingMove(hexagon);
                 boolean isValidCP = isValidCapturingMove(hexagon);
 

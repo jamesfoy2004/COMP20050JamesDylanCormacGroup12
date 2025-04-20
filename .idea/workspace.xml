@@ -10,12 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="ChangingBoard upon loading of game">
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexagonState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +34,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="MavenMigration" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -92,13 +88,13 @@
     "git-widget-placeholder": "SaveAndLoad",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/corma/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll",
+    "last_opened_file_path": "C:/Users/corma/Desktop/2.2/SoftwareEngineering/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
+    "project.structure.last.edited": "Artifacts",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "project.propCompiler",
