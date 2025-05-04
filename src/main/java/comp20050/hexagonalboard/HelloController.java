@@ -724,7 +724,7 @@ public class HelloController {
 
     /**
      * Finds and returns the Polygon hexagon that matches the given HexCube coordinate.
-     * @param hex The HexCube coordinate to search for.
+     * @param hex The HexCube co-ordinate to search for.
      * @return The matching Polygon hexagon, or null if none is found.
      */
 
