@@ -1,69 +1,86 @@
 package comp20050.hexagonalboard;
 
-import javafx.geometry.Pos;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.AnchorPane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
-import javafx.scene.control.Alert;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The main JavaFX application class for the HexOust game.
+ * Handles loading the UI, initializing game state, and managing turn-based interactions
+ * between two players using animated pop-ups.
+ */
 public class HelloApplication extends Application {
     Button quitButton;
     VBox menuButton;
 
-    //red turn and blue turn pop-ups
+    // Red turn and blue turn pop-ups
     Button playerOneButton;
     Button playerTwoButton;
 
     private List<Polygon> hexagons;
 
-    //used for dictating how long a pop-up runs
+    // Timelines used to control how long a pop-up is visible
     private Timeline playerOneTime;
     private Timeline playerTwoTime;
 
     private boolean isPlayerOneTurn = true;
 
+    /**
+     * Returns whether it's currently Player 1's turn.
+     *
+     * @return true if it's Player 1's turn; false otherwise.
+     */
     public boolean isPlayerOneTurn() {
         return isPlayerOneTurn;
     }
 
+    /**
+     * Sets the current turn.
+     *
+     * @param playerOneTurn true if it's Player 1's turn, false otherwise.
+     */
     public void setPlayerOneTurn(boolean playerOneTurn) {
         isPlayerOneTurn = playerOneTurn;
     }
 
+    /**
+     * Starts the JavaFX application and displays a splash screen
+     * before loading the main game scene.
+     *
+     * @param stage the primary stage for this application.
+     * @throws IOException if the FXML cannot be loaded.
+     */
     @Override
     public void start(Stage stage) throws IOException {
-//=======================================================FXML===========================================================
-
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/comp20050/hexagonalboard/hello-view.fxml"));
-
-//=======================================================Splash=========================================================
 
         new SplashLoadingScreen().show(stage, isNewGame -> {
             if (isNewGame) {
-                // Just start with a fresh board — no prompt
-                loadMainScene(stage, null); // or use a flag to indicate it's a new game
-            } else {
-                // Option for another button
+                loadMainScene(stage, null);
             }
         });
     }
 
+    /**
+     * Loads the main game scene, initializes buttons, hexagons, and turn mechanics.
+     *
+     * @param stage the primary window stage.
+     * @param filename currently unused; placeholder for future save file loading.
+     */
     private void loadMainScene(Stage stage, String filename) {
         try {
             System.out.println(filename);
@@ -73,7 +90,6 @@ public class HelloApplication extends Application {
             Menu menu = new Menu(stage, fxmlLoader, this);
             menuButton = menu.getMenuBox();
             root.getChildren().add(menuButton);
-
             AnchorPane.setLeftAnchor(menuButton, 10.0);
             AnchorPane.setTopAnchor(menuButton, 10.0);
 
@@ -81,67 +97,12 @@ public class HelloApplication extends Application {
             container.getChildren().add(root);
             Scene scene = new Scene(container, 800, 700);
 
+            initializePlayerButtons(root);
+            initializeHexagons(fxmlLoader);
 
-            //red pop-up
-            playerOneButton = new Button();
-            playerOneButton.setStyle("-fx-background-color: white; -fx-text-fill: black;  -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
-            playerOneButton.setText(" : RED player's turn");
-            playerOneButton.setPrefHeight(200);
-            playerOneButton.setPrefWidth(500);
-            playerOneButton.setVisible(false);
-
-            //add red circle to pop-up
-            Image image = new Image(getClass().getResourceAsStream("red.png"));
-            ImageView iview = new ImageView(image);
-
-            iview.setFitWidth(50);
-            iview.setFitHeight(50);
-            iview.setPreserveRatio(true);
-
-            playerOneButton.setGraphic(iview);
-
-            root.getChildren().add(playerOneButton);
-            AnchorPane.setLeftAnchor(playerOneButton, 450.0);
-            AnchorPane.setTopAnchor(playerOneButton, 600.0);
-
-            //blue pop-up
-            playerTwoButton = new Button();
-            playerTwoButton.setStyle("-fx-background-color: white; -fx-text-fill: black;  -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
-            playerTwoButton.setText(" : BLUE player's turn");
-            playerTwoButton.setPrefHeight(200);
-            playerTwoButton.setPrefWidth(500);
-            playerTwoButton.setVisible(false);
-
-            //add blue circle to pop-up
-            Image imageBlue = new Image(getClass().getResourceAsStream("blue.png"));
-            ImageView iviewBlue = new ImageView(imageBlue);
-
-            iviewBlue.setFitWidth(50);
-            iviewBlue.setFitHeight(50);
-            iviewBlue.setPreserveRatio(true);
-
-            playerTwoButton.setGraphic(iviewBlue);
-
-            root.getChildren().add(playerTwoButton);
-            AnchorPane.setLeftAnchor(playerTwoButton, 450.0);
-            AnchorPane.setTopAnchor(playerTwoButton, 600.0);
-
-
-            HelloController controller = fxmlLoader.getController();
-            controller.setApp(this);
-            hexagons = controller.getHexagons();
-            for (Polygon hex : hexagons) {
-                hex.setUserData(HexState.OFF); // Initial state
-                hex.setOnMouseClicked(event -> {
-                    playerTurn(hex); // this will assign the correct state
-                });
-
-            }
-
-            //method which defines how long the pop-ups run
             makeTimeLines();
 
-            //by default start game with red players turn
+            // Start with red player's turn
             playerOneTime.play();
             playerOneButton.setVisible(true);
             for (Polygon hexagon : hexagons) {
@@ -149,10 +110,9 @@ public class HelloApplication extends Application {
                 hexagon.setOpacity(0.5);
             }
 
-
+            // Apply scaling to the entire board
             Scale scale = new Scale(0.5, 0.5);
             root.getTransforms().add(scale);
-
             root.setTranslateX(50);
             root.setTranslateY(0);
 
@@ -164,70 +124,131 @@ public class HelloApplication extends Application {
         }
     }
 
-    public void makeTimeLines(){
-        playerOneTime = new Timeline(new KeyFrame(
-                Duration.seconds(2),
-                event ->{
-                    for(Polygon hexagon : hexagons) {
-                        hexagon.setDisable(false);
-                        hexagon.setOpacity(1);
-                    }
-                    playerOneButton.setVisible(false);
-                }
-        ));
+    /**
+     * Initializes the visual pop-up buttons that indicate whose turn it is.
+     *
+     * @param root the root AnchorPane to which the buttons will be added.
+     */
+    private void initializePlayerButtons(AnchorPane root) {
+        // Red player's turn pop-up
+        playerOneButton = new Button(" : RED player's turn");
+        playerOneButton.setStyle("-fx-background-color: white; -fx-text-fill: black; -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
+        playerOneButton.setPrefSize(500, 200);
+        playerOneButton.setVisible(false);
+        Image redImage = new Image(getClass().getResourceAsStream("red.png"));
+        ImageView redView = new ImageView(redImage);
+        redView.setFitWidth(50);
+        redView.setFitHeight(50);
+        redView.setPreserveRatio(true);
+        playerOneButton.setGraphic(redView);
+        root.getChildren().add(playerOneButton);
+        AnchorPane.setLeftAnchor(playerOneButton, 450.0);
+        AnchorPane.setTopAnchor(playerOneButton, 600.0);
 
-        playerTwoTime = new Timeline(new KeyFrame(
-                Duration.seconds(2),
-                eventBlue ->{
-                    for(Polygon hexagon : hexagons) {
-                        hexagon.setDisable(false);
-                        hexagon.setOpacity(1);
-                    }
-                    playerTwoButton.setVisible(false);
-                }
-        ));
+        // Blue player's turn pop-up
+        playerTwoButton = new Button(" : BLUE player's turn");
+        playerTwoButton.setStyle(playerOneButton.getStyle());
+        playerTwoButton.setPrefSize(500, 200);
+        playerTwoButton.setVisible(false);
+        Image blueImage = new Image(getClass().getResourceAsStream("blue.png"));
+        ImageView blueView = new ImageView(blueImage);
+        blueView.setFitWidth(50);
+        blueView.setFitHeight(50);
+        blueView.setPreserveRatio(true);
+        playerTwoButton.setGraphic(blueView);
+        root.getChildren().add(playerTwoButton);
+        AnchorPane.setLeftAnchor(playerTwoButton, 450.0);
+        AnchorPane.setTopAnchor(playerTwoButton, 600.0);
     }
 
-    public void playerTurn(Polygon hexagon){
+    /**
+     * Initializes hexagon shapes, setting default state and click behavior.
+     *
+     * @param fxmlLoader the FXMLLoader used to get the controller and board elements.
+     */
+    private void initializeHexagons(FXMLLoader fxmlLoader) {
+        HelloController controller = fxmlLoader.getController();
+        controller.setApp(this);
+        hexagons = controller.getHexagons();
+        for (Polygon hex : hexagons) {
+            hex.setUserData(HexState.OFF);
+            hex.setOnMouseClicked(event -> playerTurn(hex));
+        }
+    }
 
-        if(isPlayerOneTurn()){
+    /**
+     * Defines the duration and effects for each player's pop-up timeline.
+     */
+    public void makeTimeLines() {
+        playerOneTime = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            for (Polygon hexagon : hexagons) {
+                hexagon.setDisable(false);
+                hexagon.setOpacity(1);
+            }
+            playerOneButton.setVisible(false);
+        }));
+
+        playerTwoTime = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            for (Polygon hexagon : hexagons) {
+                hexagon.setDisable(false);
+                hexagon.setOpacity(1);
+            }
+            playerTwoButton.setVisible(false);
+        }));
+    }
+
+    /**
+     * Executes a player's turn and alternates to the other player.
+     *
+     * @param hexagon the clicked hexagon representing a move.
+     */
+    public void playerTurn(Polygon hexagon) {
+        if (isPlayerOneTurn()) {
             PlayerOne(hexagon);
             setPlayerOneTurn(false);
-        }
-        else{
+        } else {
             PlayerTwo(hexagon);
             setPlayerOneTurn(true);
         }
     }
 
-    public void PlayerOne(Polygon hex){
-        //colour given hex red
+    /**
+     * Handles red player's move by setting color, state, and triggering the blue turn pop-up.
+     *
+     * @param hex the hexagon selected by red player.
+     */
+    public void PlayerOne(Polygon hex) {
         hex.setFill(Color.RED);
         hex.setUserData(HexState.PLAYER1);
-
-        //show BLUE TURN pop up
         playerTwoTime.play();
         playerTwoButton.setVisible(true);
-        for(Polygon hexagon : hexagons) {
+        for (Polygon hexagon : hexagons) {
             hexagon.setDisable(true);
             hexagon.setOpacity(0.5);
         }
     }
 
-    public void PlayerTwo(Polygon hex){
-        //colour given hex blue
+    /**
+     * Handles blue player's move by setting color, state, and triggering the red turn pop-up.
+     *
+     * @param hex the hexagon selected by blue player.
+     */
+    public void PlayerTwo(Polygon hex) {
         hex.setFill(Color.BLUE);
         hex.setUserData(HexState.PLAYER2);
-
-        //show RED TURN pop up
         playerOneTime.play();
         playerOneButton.setVisible(true);
-        for(Polygon hexagon : hexagons) {
+        for (Polygon hexagon : hexagons) {
             hexagon.setDisable(true);
             hexagon.setOpacity(0.5);
         }
     }
 
+    /**
+     * Launches the application.
+     *
+     * @param args command line arguments.
+     */
     public static void main(String[] args) {
         launch();
     }

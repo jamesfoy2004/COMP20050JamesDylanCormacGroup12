@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Represents a vertical menu in the hexagonal board game UI.
+ * Represents a vertical menu in our HexOust application.
  * Includes options for starting a new game, saving, loading, and quitting.
  */
 public class Menu {
@@ -53,7 +53,7 @@ public class Menu {
     }
 
     /**
-     * Creates a styled menu button with the given text and action.
+     * Creates a menu button with the given text and action.
      *
      * @param text   The Button Name
      * @param action The action to perform on click
@@ -108,7 +108,7 @@ public class Menu {
     }
 
     /**
-     * Handles logic for quitting the application.
+     * Handles the logic for quitting the game.
      *
      * @param stage      the main application stage
      * @param fxmlLoader the FXMLLoader used to access the controller
@@ -198,7 +198,7 @@ public class Menu {
     }
 
     /**
-     * Creates a button representing a save/load slot, which sets the result and closes the dialog.
+     * Creates a button representing a save/load slot, which when clicked, calls to either save or load to/from this slot before closing the pop-up window.
      *
      * @param dialog the dialog to close upon selection
      * @param slot   the slot number represented by this button
@@ -215,7 +215,7 @@ public class Menu {
     }
 
     /**
-     * Shows an informational popup with the given message.
+     * Shows a popup with the given message.
      *
      * @param message the message to display
      */

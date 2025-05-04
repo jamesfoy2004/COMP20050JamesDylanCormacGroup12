@@ -286,8 +286,6 @@ public class HelloController {
         hexagons.add(hex126);
         hexagons.add(hex127);
 
-        //==============================================================================================================
-
         for (Polygon hexagon : hexagons) {
             HexState state = HexState.OFF;
             hexagon.setUserData(state);
@@ -297,6 +295,16 @@ public class HelloController {
         }
     }
 
+    /**
+     * Sets the fill colour of the given hexagon based on its current {@link HexState}.
+     * <ul>
+     *     <li>{@code PLAYER1} → RED</li>
+     *     <li>{@code PLAYER2} → BLUE</li>
+     *     <li>{@code OFF} → GREY</li>
+     * </ul>
+     *
+     * @param hexagon the hexagon to colour
+     */
     private void setHexagonColour(Polygon hexagon, HexState state) {
         state = (HexState) hexagon.getUserData();
         switch (state) {
@@ -411,7 +419,6 @@ public class HelloController {
         }
     }
 
-
     @FXML
     void getHexID(MouseEvent event) {
 
@@ -459,6 +466,7 @@ public class HelloController {
 
 
     }
+
     //check if any opponent groups are captured after valid move
     public void checkCaptures(Polygon placedHex) {
         Paint placedColor = placedHex.getFill();
@@ -625,10 +633,24 @@ public class HelloController {
         return null;
     }
 
+    /**
+     * Returns the {@link HelloApplication} instance associated with this controller
+     *
+     * @return the current {@code HelloApplication} instance
+     */
     public HelloApplication getApp() {
         return this.app;
     }
 
+    /**
+     * Applies a saved board state by updating each hexagon's {@link HexState} and fill color.
+     * <p>
+     * This method assumes the board has already been initialized. If the provided state array is null
+     * or its length does not match the current board size, it aborts and a warning is printed.
+     * </p>
+     *
+     * @param states an array of {@code HexState} objects representing the saved state of each hexagon
+     */
     public void applyLoadedBoard(HexState[] states) {
         if (states != null && states.length == hexagons.size()) {
             for (int i = 0; i < hexagons.size(); i++) {
@@ -640,8 +662,6 @@ public class HelloController {
             System.out.println("Invalid or corrupt save file.");
         }
     }
-
-    //==================================================================================================================
 
     @FXML // fx:id="hex1"
     private Polygon hex1; // Value injected by FXMLLoader
