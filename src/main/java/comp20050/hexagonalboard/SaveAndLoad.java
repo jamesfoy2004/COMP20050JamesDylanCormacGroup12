@@ -7,6 +7,7 @@ import java.io.*;
 import java.util.List;
 
 public class SaveAndLoad {
+
     public static void saveBoardState(List<Polygon> hexagons, int slot) {
         String FILE_NAME = getSaveFileName(slot);
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
@@ -22,9 +23,16 @@ public class SaveAndLoad {
     }
 
     public static HexState[] loadBoardState(int slot) {
-        String FILE_NAME = getSaveFileName(slot);
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-            return (HexState[]) ois.readObject();
+        String filename = "Save" + slot + ".ser";
+        File file = new File(filename);
+
+        if (!file.exists()) {
+            System.out.println("Save file not found: " + filename);
+            return null;
+        }
+
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
+            return (HexState[]) in.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
@@ -47,9 +55,5 @@ public class SaveAndLoad {
             hex.setFill(Color.GREY); // or whatever default "OFF" color is
         }
         controller.getApp().setPlayerOneTurn(true); // reset to player one's turn
-    }
-
-    public void updateFillFromState(Polygon hex) {
-        
     }
 }

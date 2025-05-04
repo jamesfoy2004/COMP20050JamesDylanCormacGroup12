@@ -1,7 +1,12 @@
 package comp20050.hexagonalboard;
 
-import javafx.scene.control.*;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
 
@@ -10,30 +15,32 @@ import java.util.Optional;
 
 public class DropDownMenu {
 
-    private final MenuButton menuButton;
+    private final VBox menuBox;
 
     public DropDownMenu(Stage stage, FXMLLoader fxmlLoader) {
-        menuButton = new MenuButton("Menu");
-        menuButton.setStyle("-fx-background-color: red;");
-        menuButton.setPrefHeight(100);
-        menuButton.setPrefWidth(200);
+        menuBox = new VBox(20); // spacing between buttons
+        menuBox.setAlignment(Pos.CENTER);
+        menuBox.setStyle("-fx-padding: 10;");
 
-        MenuItem changeTheme = new MenuItem("Change Theme");
-        MenuItem newGame = new MenuItem("New Game");
-        MenuItem loadGame = new MenuItem("Load Game");
-        MenuItem quitMenuButton = new MenuItem("Quit");
+        Button newGameBtn = createStyledButton("New Game");
+        Button saveGameBtn = createStyledButton("Save game");
+        Button loadGameBtn = createStyledButton("Load Game");
+        Button quitBtn = createStyledButton("Quit");
 
-        changeTheme.setOnAction(event -> showMessage("Change Theme Selected"));
-
-        newGame.setOnAction(event -> {
+        newGameBtn.setOnAction(event -> {
             if (promptToSave(fxmlLoader)) {
                 HelloController controller = fxmlLoader.getController();
                 SaveAndLoad.clearBoard(controller);
                 showMessage("New Game Started");
             }
         });
+        saveGameBtn.setOnAction(event -> {
+            if (promptToSave(fxmlLoader)) {
+            HelloController controller = fxmlLoader.getController();
+            }
+        });
 
-        loadGame.setOnAction(event -> {
+        loadGameBtn.setOnAction(event -> {
             int slot = promptForSlot("Load Game");
             if (slot != -1) {
                 HelloController controller = fxmlLoader.getController();
@@ -47,14 +54,19 @@ public class DropDownMenu {
             }
         });
 
-
-        quitMenuButton.setOnAction(event -> {
+        quitBtn.setOnAction(event -> {
             if (promptToSave(fxmlLoader)) {
                 stage.close();
             }
         });
 
-        menuButton.getItems().addAll(changeTheme, newGame, loadGame, quitMenuButton);
+        menuBox.getChildren().addAll(newGameBtn, saveGameBtn, loadGameBtn, quitBtn);
+    }
+
+    private Button createStyledButton(String text) {
+        Button button = new Button(text);
+        button.setStyle("-fx-font-size: 16px; -fx-pref-width: 200px;");
+        return button;
     }
 
     private boolean promptToSave(FXMLLoader fxmlLoader) {
@@ -80,71 +92,62 @@ public class DropDownMenu {
                     showMessage("Game Saved to Slot " + slot);
                     return true;
                 } else {
-                    return false; // user cancelled the slot choice
+                    return false;
                 }
             } else if (result.get() == continueWithoutSaving) {
                 return true;
             }
         }
-        return false; // Cancel or dialog closed
+        return false;
     }
 
-    private int promptForSlot(String title) {
+    public static int promptForSlot(String title) {
+        Dialog<Integer> dialog = new Dialog<>();
+        dialog.setTitle(title);
+        dialog.setHeaderText("Choose a save slot:");
 
-            Dialog<Integer> dialog = new Dialog<>();
-            dialog.setTitle(title);
-            dialog.setHeaderText("Choose a save slot:");
+        GridPane grid = new GridPane();
+        grid.setHgap(10);
+        grid.setVgap(10);
+        grid.setStyle("-fx-padding: 20;");
 
-            // Create GridPane with 2x2 layout
-            GridPane grid = new GridPane();
-            grid.setHgap(10);
-            grid.setVgap(10);
-            grid.setStyle("-fx-padding: 20;");
+        Button slot1 = new Button("Save 1");
+        Button slot2 = new Button("Save 2");
+        Button slot3 = new Button("Save 3");
+        Button slot4 = new Button("Save 4");
 
-            // Slot buttons
-            Button slot1 = new Button("Save 1");
-            Button slot2 = new Button("Save 2");
-            Button slot3 = new Button("Save 3");
-            Button slot4 = new Button("Save 4");
-
-            // Set same size for buttons
-            double width = 100;
-            double height = 40;
-            for (Button b : List.of(slot1, slot2, slot3, slot4)) {
-                b.setPrefSize(width, height);
-            }
-
-            // Place in 2x2 grid
-            grid.add(slot1, 0, 0);
-            grid.add(slot2, 1, 0);
-            grid.add(slot3, 0, 1);
-            grid.add(slot4, 1, 1);
-
-            dialog.getDialogPane().setContent(grid);
-            dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-
-            // Set result converter
-            slot1.setOnAction(e -> {
-                dialog.setResult(1);
-                dialog.close();
-            });
-            slot2.setOnAction(e -> {
-                dialog.setResult(2);
-                dialog.close();
-            });
-            slot3.setOnAction(e -> {
-                dialog.setResult(3);
-                dialog.close();
-            });
-            slot4.setOnAction(e -> {
-                dialog.setResult(4);
-                dialog.close();
-            });
-
-            // Show and get result
-            Optional<Integer> result = dialog.showAndWait();
-            return result.orElse(-1);
+        for (Button b : List.of(slot1, slot2, slot3, slot4)) {
+            b.setPrefSize(100, 40);
         }
+
+        grid.add(slot1, 0, 0);
+        grid.add(slot2, 1, 0);
+        grid.add(slot3, 0, 1);
+        grid.add(slot4, 1, 1);
+
+        dialog.getDialogPane().setContent(grid);
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        slot1.setOnAction(e -> {
+            dialog.setResult(1);
+            dialog.close();
+        });
+        slot2.setOnAction(e -> {
+            dialog.setResult(2);
+            dialog.close();
+        });
+        slot3.setOnAction(e -> {
+            dialog.setResult(3);
+            dialog.close();
+        });
+        slot4.setOnAction(e -> {
+            dialog.setResult(4);
+            dialog.close();
+        });
+
+        Optional<Integer> result = dialog.showAndWait();
+        return result.orElse(-1);
+    }
 
     private void showMessage(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -154,7 +157,7 @@ public class DropDownMenu {
         alert.showAndWait();
     }
 
-    public MenuButton getMenuButton() {
-        return menuButton;
+    public VBox getMenuBox() {
+        return menuBox;
     }
 }

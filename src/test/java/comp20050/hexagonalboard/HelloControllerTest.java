@@ -13,7 +13,6 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class HelloControllerTest {
-
     private HelloController controller;
     private HelloApplication app;
 
@@ -37,7 +36,7 @@ public class HelloControllerTest {
 
     @Test
     public void testCaptureSingleOpponentHex() {
-        app.setRedTurn(true);
+        app.setPlayerOneTurn(true);
 
         Polygon center = controller.getHexagons().get(24);
         center.setFill(Color.RED);
@@ -53,4 +52,5 @@ public class HelloControllerTest {
         controller.checkCaptures(center);
         assertEquals(Color.RED, target.getFill()); // captured
     }
+
 }

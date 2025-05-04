@@ -20,7 +20,6 @@ public class SplashLoadingScreen {
 
     public void show(Stage stage, Consumer<Boolean> afterSplash) {
         try {
-            // Loading splash image
             InputStream imageStream = getClass().getResourceAsStream("/comp20050/hexagonalboard/splash.png");
             if (imageStream == null) {
                 throw new IOException("Splash image not found!");
@@ -32,18 +31,18 @@ public class SplashLoadingScreen {
             imageView.setFitHeight(500);
 
             // Buttons for "New Game" and "Load Game"
-            Button newGameBtn = new Button("New Game");
-            Button loadGameBtn = new Button("Load Game");
+            Button playGameBtn = new Button("Play");
+            Button quitGameBtn = new Button("Quit");
 
-            newGameBtn.setStyle("-fx-font-size: 16px; -fx-pref-width: 200px;");
-            loadGameBtn.setStyle("-fx-font-size: 16px; -fx-pref-width: 200px;");
+            playGameBtn.setStyle("-fx-font-size: 16px; -fx-pref-width: 200px;");
+            quitGameBtn.setStyle("-fx-font-size: 16px; -fx-pref-width: 200px;");
 
             // Button actions
-            newGameBtn.setOnAction(e -> afterSplash.accept(true));  // New Game selected
-            loadGameBtn.setOnAction(e -> afterSplash.accept(false)); // Load Game selected
+            playGameBtn.setOnAction(e -> afterSplash.accept(true));
+            quitGameBtn.setOnAction(e -> afterSplash.accept(false));
 
             // Adding buttons to layout
-            VBox menuBox = new VBox(20, newGameBtn, loadGameBtn);
+            VBox menuBox = new VBox(20, playGameBtn, quitGameBtn);
             menuBox.setAlignment(Pos.CENTER);
             menuBox.setLayoutY(520);
             menuBox.setLayoutX(300);
@@ -58,13 +57,5 @@ public class SplashLoadingScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // Method to load the game (stubbed here for your use)
-    private void loadMainScene(Stage stage, String fileName) {
-        // Here you would load the game from the specified file
-        System.out.println("Loading game from: " + fileName);
-
-        // Assuming the logic to load and display the game is in this method
     }
 }

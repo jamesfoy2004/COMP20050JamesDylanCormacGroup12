@@ -2,24 +2,22 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="HexagonalBoard:jar2" />
+      <artifact name="HexagonalBoard:jar" />
     </artifacts-to-build>
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="ChangingBoard upon loading of game">
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/DropDownMenu.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save2.ser" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save3.ser" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save4.ser" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" afterDir="false" />
+    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="In progress code for (in)valid placements and (non)capturing.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Save1.ser" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/DropDownMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/DropDownMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/SerialisedObjectsTest.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +40,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="MavenMigration" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,7 +54,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git&quot;,
-    &quot;accountId&quot;: &quot;d511ccd3-7e34-41ea-ad84-2ab38736b951&quot;
+    &quot;accountId&quot;: &quot;54f0da74-26d5-40cd-be8c-88c4db287a0c&quot;
   },
   &quot;recentNewPullRequestHead&quot;: {
     &quot;server&quot;: {
@@ -92,17 +90,18 @@
     &quot;JUnit.HelloControllerTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.HelloControllerTest.testCaptureSingleOpponentHex.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;SaveAndLoad&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/corma/Desktop/2.2/SoftwareEngineering/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/corma/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;project.propCompiler&quot;,
@@ -117,22 +116,16 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\corma\Desktop\2.2\SoftwareEngineering\COMP20050JamesDylanCormacGroup12\src\test\java\comp20050\hexagonalboard" />
-      <recent name="C:\Users\corma\Desktop\2.2\SoftwareEngineering\COMP20050JamesDylanCormacGroup12\src\test\java" />
-      <recent name="C:\Users\corma\Desktop\2.2\SoftwareEngineering\COMP20050JamesDylanCormacGroup12\src" />
       <recent name="C:\Users\corma\Desktop\2.2\Algorithms\Assignments\Ass3\COMP20050JamesDylanCormacGroup12\src\main\resources\comp20050\hexagonalboard" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="comp20050.hexagonalboard" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.Main" />
+    <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloApplication" />
       <module name="HexagonalBoard" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="comp20050.hexagonalboard.DropDownMenu" />
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -140,12 +133,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PopUps" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.PopUps" />
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.Main" />
       <module name="HexagonalBoard" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="comp20050.hexagonalboard.DropDownMenu" />
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -158,10 +151,25 @@
       <module name="HexagonalBoard" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="comp20050.hexagonalboard.DropDownMenu" />
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="HelloControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HexagonalBoard" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="comp20050.hexagonalboard" />
+      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.HelloControllerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,7 +178,7 @@
       <module name="HexagonalBoard" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="comp20050.hexagonalboard.DropDownMenu" />
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -182,25 +190,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HexagonalBoard.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/out/artifacts/HexagonalBoard_jar/HexagonalBoard.jar" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.HelloControllerTest.testCaptureSingleOpponentHex" />
+        <item itemvalue="JUnit.HelloControllerTest" />
+        <item itemvalue="Application.HelloApplication" />
         <item itemvalue="Application.SerialiseObjects" />
-        <item itemvalue="JAR Application.HexagonalBoard.jar" />
-        <item itemvalue="Application.PopUps" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
-        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
@@ -233,11 +237,7 @@
       <workItem from="1741650390691" duration="2000" />
       <workItem from="1741650909883" duration="60000" />
       <workItem from="1741651005413" duration="456000" />
-      <workItem from="1745165406716" duration="1848000" />
-      <workItem from="1745167365828" duration="14168000" />
-      <workItem from="1745230676498" duration="5000" />
-      <workItem from="1746300516908" duration="7900000" />
-      <workItem from="1746358416647" duration="7345000" />
+      <workItem from="1743974297082" duration="702000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />
@@ -295,23 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741651408820</updated>
     </task>
-    <task id="LOCAL-00008" summary="ChangingBoard upon loading of game">
+    <task id="LOCAL-00008" summary="In progress code for (in)valid placements and (non)capturing.">
       <option name="closed" value="true" />
-      <created>1745172367311</created>
+      <created>1743974455724</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1745172367311</updated>
+      <updated>1743974455724</updated>
     </task>
-    <task id="LOCAL-00009" summary="ChangingBoard upon loading of game">
-      <option name="closed" value="true" />
-      <created>1745185095454</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1745185095454</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -334,7 +326,18 @@
     <MESSAGE value="The main funjctioin toi make the jar that we somehow deleted" />
     <MESSAGE value="Fixed jar nopt loading issues" />
     <MESSAGE value="Saving to file (application in a randomly generated array) with mockito tests (commented out)" />
-    <MESSAGE value="ChangingBoard upon loading of game" />
-    <option name="LAST_COMMIT_MESSAGE" value="ChangingBoard upon loading of game" />
+    <MESSAGE value="In progress code for (in)valid placements and (non)capturing." />
+    <option name="LAST_COMMIT_MESSAGE" value="In progress code for (in)valid placements and (non)capturing." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexGrid.java</url>
+          <line>17</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

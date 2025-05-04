@@ -1,13 +1,13 @@
 package comp20050.hexagonalboard;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.MenuButton;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -24,7 +24,7 @@ import java.util.List;
 
 public class HelloApplication extends Application {
     Button quitButton;
-    MenuButton menuButton;
+    VBox menuButton;
 
     //red turn and blue turn pop-ups
     Button playerOneButton;
@@ -55,72 +55,13 @@ public class HelloApplication extends Application {
 //=======================================================Splash=========================================================
 
         new SplashLoadingScreen().show(stage, isNewGame -> {
-            // This lambda will be triggered after the splash screen when the user clicks "New Game" or "Load Game"
             if (isNewGame) {
-                // For a new game, you need to show the slot selection prompt
-                // (Note: the file names here will be used to represent the game saves)
-                // You can call the prompt to choose the slot, and once chosen, load the respective save.
-                promptForGameSlot(stage, true);
+                // Just start with a fresh board — no prompt
+                loadMainScene(stage, null); // or use a flag to indicate it's a new game
             } else {
-                // For loading an existing game, the same slot prompt will appear
-                promptForGameSlot(stage, false);
+                // Option for another button
             }
         });
-
-    }
-
-    private void promptForGameSlot(Stage stage, boolean isNewGame) {
-        // Create an Alert to ask the user for the save slot
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Select Saved Game");
-        alert.setHeaderText(isNewGame ? "Select a Save for New Game" : "Select a Save File to load");
-        alert.setContentText("Select a Save:");
-
-        // Create a GridPane to display buttons in a 2x2 grid
-        GridPane grid = new GridPane();
-        grid.setHgap(10);  // Horizontal gap between buttons
-        grid.setVgap(10);  // Vertical gap between buttons
-        grid.setAlignment(Pos.CENTER);  // Align the grid to the center
-
-        // Create the buttons for slots 1, 2, 3, and 4
-        Button slot1 = new Button("Slot 1");
-        Button slot2 = new Button("Slot 2");
-        Button slot3 = new Button("Slot 3");
-        Button slot4 = new Button("Slot 4");
-
-        // Add buttons to the grid
-        grid.add(slot1, 0, 0);  // Row 0, Column 0
-        grid.add(slot2, 1, 0);  // Row 0, Column 1
-        grid.add(slot3, 0, 1);  // Row 1, Column 0
-        grid.add(slot4, 1, 1);  // Row 1, Column 1
-
-        // Set the grid as the content of the alert
-        alert.getDialogPane().setContent(grid);
-
-        // Set action listeners for each button to load the respective game
-        slot1.setOnAction(e -> {
-            String fileName = "Save1.ser";
-            loadMainScene(stage, fileName);
-            alert.close(); // Close the alert after the selection
-        });
-        slot2.setOnAction(e -> {
-            String fileName = "Save2.ser";
-            loadMainScene(stage, fileName);
-            alert.close(); // Close the alert after the selection
-        });
-        slot3.setOnAction(e -> {
-            String fileName = "Save3.ser";
-            loadMainScene(stage, fileName);
-            alert.close(); // Close the alert after the selection
-        });
-        slot4.setOnAction(e -> {
-            String fileName = "Save4.ser";
-            loadMainScene(stage, fileName);
-            alert.close(); // Close the alert after the selection
-        });
-
-        // Show the alert and wait for the user to select a slot
-        alert.showAndWait();
     }
 
     private void loadMainScene(Stage stage, String filename) {
@@ -130,7 +71,7 @@ public class HelloApplication extends Application {
             AnchorPane root = fxmlLoader.load();
 
             DropDownMenu dropDownMenu = new DropDownMenu(stage, fxmlLoader);
-            menuButton = dropDownMenu.getMenuButton();
+            menuButton = dropDownMenu.getMenuBox();
             root.getChildren().add(menuButton);
 
             AnchorPane.setLeftAnchor(menuButton, 10.0);
@@ -221,24 +162,6 @@ public class HelloApplication extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void updateFillFromState(Polygon hex) {
-        HexState state = (HexState) hex.getUserData();
-        switch (state) {
-            case PLAYER1 -> hex.setFill(Color.RED);
-            case PLAYER2 -> hex.setFill(Color.BLUE);
-            default -> hex.setFill(Color.LIGHTGRAY);
-        }
-    }
-
-
-    private void showMessage(String message) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setTitle("Menu Selection");
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 
     public void makeTimeLines(){
