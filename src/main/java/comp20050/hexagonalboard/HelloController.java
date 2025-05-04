@@ -292,6 +292,11 @@ public class HelloController {
             HexState state = HexState.OFF;
             hexagon.setUserData(state);
             setHexagonColour(hexagon, state);
+
+            //preserve hex hover functionality
+            hexagon.setOnMouseEntered(event -> hexHoverHandler(event));
+            hexagon.setOnMouseExited(event -> hexExit(event));
+
         }
 
     }
@@ -495,6 +500,15 @@ public class HelloController {
 
 
     }
+
+    /**
+     * Checks all neighboring hexagons of the most recently placed stone to determine
+     * if any opponent groups are captured. If a group is captured,
+     * all hexagons in that group are changed to grey.
+     * @param placedHex The hexagon where the current player has just placed their stone.
+     */
+
+
     //check if any opponent groups are captured after valid move
     public void checkCaptures(Polygon placedHex) {
         Paint placedColor = placedHex.getFill();
@@ -512,6 +526,16 @@ public class HelloController {
             }
         }
     }
+
+    /**
+     * Determines whether a group of opponent-colored hexagons is fully surrounded and can be captured.
+     *
+     * @param current The current hexagon being checked.
+     * @param opponentColor The color of the opponent's stones.
+     * @param visited A list of already visited hexagons to avoid reprocessing.
+     * @param group The group of hexagons that can be captured.
+     * @return true if the group is fully surrounded (capturable); false otherwise.
+     */
 
     private boolean isCapturedGroup(Polygon current, Paint opponentColor, List<Polygon> visited, List<Polygon> group) {
         if (visited.contains(current)) return true;
@@ -535,6 +559,12 @@ public class HelloController {
         return true; //fully surrounded
     }
 
+    /**
+     * Checks if a move is a valid non-capturing move by verifying that the hexagon does not touch any friendly stones.
+     * @param hexagon The hexagon to test.
+     * @return true if the move is legal and does not connect to any friendly neighbors; false otherwise.
+     */
+
     private boolean isValidNonCapturingMove(Polygon hexagon) {
         List<Polygon> neighbors = getNeighborHexagons(hexagon);
 
@@ -547,6 +577,13 @@ public class HelloController {
 
         return true; //only connects to empty or opponents stones
     }
+
+    /**
+     * Determines whether placing a stone on the given hexagon is a valid capturing move.
+     * A capturing move must form a new group that is larger than all adjacent opponent groups it touches.
+     * @param hexagon The hexagon to test for a capturing move.
+     * @return true if this is a legal capturing move; false otherwise.
+     */
 
     private boolean isValidCapturingMove(Polygon hexagon) {
         Paint playerColor = app.isPlayerOneTurn() ? Color.RED : Color.BLUE;
@@ -592,6 +629,14 @@ public class HelloController {
         return true;
     }
 
+    /**
+     * Recursively adds all directly connected hexagons of the same colour to the specified group.
+     * @param start  The starting hexagon for group expansion.
+     * @param color  The colour to match during expansion.
+     * @param group  The list of hexagons belonging to the group.
+     */
+
+
     //helper function: adds connected same colour hexes to group
     private void expandGroup(Polygon start, Paint color, List<Polygon> group) {
         if (group.contains(start)) return;
@@ -604,6 +649,14 @@ public class HelloController {
         }
     }
 
+
+    /**
+     * Checks whether a new group already exists in a list of known groups.
+     * @param groups A list of existing groups.
+     * @param newGroup The new group being checked.
+     * @return true if the group is already present in the list; false otherwise.
+     */
+
     //check if group is already in list of existing group
     private boolean containsGroup(List<List<Polygon>> groups, List<Polygon> newGroup) {
         for (List<Polygon> g : groups) {
@@ -612,10 +665,21 @@ public class HelloController {
         return false;
     }
 
+    /**
+     * Assigns validity status to the given hexagon by checking for both capturing and non-capturing move legality.
+     * @param hexagon The hexagon that we want to validate.
+     */
+
     private void checkValidity(Polygon hexagon) {
         boolean isValid = isValidNonCapturingMove(hexagon) || isValidCapturingMove(hexagon);
         hexagon.setUserData(isValid);
     }
+
+    /**
+     * Returns a list of adjacent hexagons for a given hexagon based on its board position.
+     * @param hexagon The hexagon for which to find neighbors.
+     * @return A list of up to 6 neighboring hexagons.
+     */
 
     //Gets neighbour for given hexagon
     private List<Polygon> getNeighborHexagons(Polygon hexagon) {
@@ -640,6 +704,13 @@ public class HelloController {
         return neighbors;
     }
 
+
+    /**
+     * Converts an index from the list of hexagons into its corresponding HexCube coordinate.
+     * @param index The index in the list of hexagons.
+     * @return The corresponding HexCube coordinates for that index.
+     */
+
     //Converts a hexagon's index into HexCube coordinate system.
     private HexCube getHexCubeFromIndex(int index) {
         int row = index / 7;
@@ -649,6 +720,13 @@ public class HelloController {
         int s = -q - r;
         return new HexCube(q, r, s);
     }
+
+
+    /**
+     * Finds and returns the Polygon hexagon that matches the given HexCube coordinate.
+     * @param hex The HexCube coordinate to search for.
+     * @return The matching Polygon hexagon, or null if none is found.
+     */
 
     //Finds Polygon hexagon corresponding to a given HexCube co-ordinate.
     private Polygon getHexagonFromCube(HexCube hex) {
