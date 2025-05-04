@@ -70,7 +70,7 @@ public class HelloApplication extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/comp20050/hexagonalboard/hello-view.fxml"));
             AnchorPane root = fxmlLoader.load();
 
-            DropDownMenu dropDownMenu = new DropDownMenu(stage, fxmlLoader);
+            Menu dropDownMenu = new Menu(stage, fxmlLoader);
             menuButton = dropDownMenu.getMenuBox();
             root.getChildren().add(menuButton);
 

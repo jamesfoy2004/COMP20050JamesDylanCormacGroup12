@@ -9,15 +9,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="In progress code for (in)valid placements and (non)capturing.">
+    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Completed Loading and Saving and UI is slghtly polished">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" afterPath="$PROJECT_DIR$/Save1.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/DropDownMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/DropDownMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Save1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/DropDownMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/HelloControllerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/HelloControllerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/comp20050/hexagonalboard/SerialisedObjectsTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save1.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save2.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save3.ser" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Save4.ser" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JUnit5 Test Class" />
         <option value="Class" />
       </list>
     </option>
@@ -51,23 +52,23 @@
     &quot;assignee&quot;: &quot;c0rm1&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git&quot;,
-    &quot;accountId&quot;: &quot;54f0da74-26d5-40cd-be8c-88c4db287a0c&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git",
+    "accountId": "d511ccd3-7e34-41ea-ad84-2ab38736b951"
   },
-  &quot;recentNewPullRequestHead&quot;: {
-    &quot;server&quot;: {
-      &quot;useHttp&quot;: false,
-      &quot;host&quot;: &quot;github.com&quot;,
-      &quot;port&quot;: null,
-      &quot;suffix&quot;: null
+  "recentNewPullRequestHead": {
+    "server": {
+      "useHttp": false,
+      "host": "github.com",
+      "port": null,
+      "suffix": null
     },
-    &quot;owner&quot;: &quot;jamesfoy2004&quot;,
-    &quot;repository&quot;: &quot;COMP20050JamesDylanCormacGroup12&quot;
+    "owner": "jamesfoy2004",
+    "repository": "COMP20050JamesDylanCormacGroup12"
   },
-  &quot;editorReviewEnabled&quot;: false
-}</component>
+  "editorReviewEnabled": false
+}]]></component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -89,12 +90,16 @@
     &quot;JAR Application.HexagonalBoard.jar.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.HelloControllerTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.HelloControllerTest.testCaptureSingleOpponentHex.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.SaveAndLoadTest.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_directory_selection&quot;: &quot;C:/Users/corma/Desktop/2.2/SoftwareEngineering/COMP20050JamesDylanCormacGroup12/src/test/java&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/corma/Downloads/openjfx-23.0.2_windows-x64_bin-sdk/javafx-sdk-23.0.2/bin/vcruntime140_1.dll&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
@@ -118,6 +123,15 @@
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\corma\Desktop\2.2\Algorithms\Assignments\Ass3\COMP20050JamesDylanCormacGroup12\src\main\resources\comp20050\hexagonalboard" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="comp20050.hexagonalboard" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="HelloApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -135,19 +149,6 @@
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.Main" />
-      <module name="HexagonalBoard" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SerialiseObjects" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.SerialiseObjects" />
       <module name="HexagonalBoard" />
       <extension name="coverage">
         <pattern>
@@ -190,21 +191,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SaveAndLoadTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="HexagonalBoard" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="comp20050.hexagonalboard.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="comp20050.hexagonalboard" />
+      <option name="MAIN_CLASS_NAME" value="comp20050.hexagonalboard.SaveAndLoadTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.SaveAndLoadTest" />
         <item itemvalue="JUnit.HelloControllerTest.testCaptureSingleOpponentHex" />
         <item itemvalue="JUnit.HelloControllerTest" />
         <item itemvalue="Application.HelloApplication" />
-        <item itemvalue="Application.SerialiseObjects" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.24807.4" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.24807.4" />
       </set>
     </attachedChunks>
   </component>
@@ -238,6 +254,7 @@
       <workItem from="1741650909883" duration="60000" />
       <workItem from="1741651005413" duration="456000" />
       <workItem from="1743974297082" duration="702000" />
+      <workItem from="1746379282162" duration="2129000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />
@@ -303,7 +320,15 @@
       <option name="project" value="LOCAL" />
       <updated>1743974455724</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Completed Loading and Saving and UI is slghtly polished">
+      <option name="closed" value="true" />
+      <created>1746374301350</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1746374301350</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -327,7 +352,8 @@
     <MESSAGE value="Fixed jar nopt loading issues" />
     <MESSAGE value="Saving to file (application in a randomly generated array) with mockito tests (commented out)" />
     <MESSAGE value="In progress code for (in)valid placements and (non)capturing." />
-    <option name="LAST_COMMIT_MESSAGE" value="In progress code for (in)valid placements and (non)capturing." />
+    <MESSAGE value="Completed Loading and Saving and UI is slghtly polished" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Loading and Saving and UI is slghtly polished" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
