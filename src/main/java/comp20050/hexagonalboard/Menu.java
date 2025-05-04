@@ -19,6 +19,8 @@ import java.util.Optional;
  */
 public class Menu {
 
+    private final HelloApplication app;
+
     private final VBox menuBox;
 
     /**
@@ -27,7 +29,9 @@ public class Menu {
      * @param stage      the stage containing the hex grid
      * @param fxmlLoader the FXMLLoader used to retrieve the controller
      */
-    public Menu(Stage stage, FXMLLoader fxmlLoader) {
+    public Menu(Stage stage, FXMLLoader fxmlLoader, HelloApplication app) {
+        this.app = app;
+
         menuBox = new VBox(20); //Spacing between the buttons
         menuBox.setAlignment(Pos.CENTER);
         menuBox.setStyle("-fx-padding: 10;");
@@ -63,7 +67,7 @@ public class Menu {
     }
 
     /**
-     * Handles logic for starting a new game.
+     * Handles the logic for "starting" a new game.
      *
      * @param fxmlLoader the FXMLLoader used to access the controller
      */
@@ -76,7 +80,7 @@ public class Menu {
     }
 
     /**
-     * Handles logic for saving a game.
+     * Handles the logic for saving a game.
      *
      * @param fxmlLoader the FXMLLoader used to access the controller
      */
@@ -85,7 +89,7 @@ public class Menu {
     }
 
     /**
-     * Handles logic for loading a game from a save slot.
+     * Handles the logic for loading a game from a given save slot.
      *
      * @param fxmlLoader the FXMLLoader used to access the controller
      */
@@ -116,12 +120,17 @@ public class Menu {
     }
 
     /**
-     * Prompts the user to save the game. If they choose to save, it asks for a slot and performs saving.
+     * Prompts the user to save the game. If they choose to save, it asks for a save slot and saves to that slot.
      *
      * @param fxmlLoader the FXMLLoader used to access the controller
      * @return true if the user proceeds (with or without saving), false if cancelled
      */
     private boolean promptToSave(FXMLLoader fxmlLoader) {
+        if (!app.isPlayerOneTurn()) {
+            showMessage("Cannot save mid turn.");
+            return false;
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Save Game?");
         alert.setHeaderText("Would you like to save the game before proceeding?");
