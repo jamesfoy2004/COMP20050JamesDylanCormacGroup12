@@ -292,44 +292,8 @@ public class HelloController {
             HexState state = HexState.OFF;
             hexagon.setUserData(state);
             setHexagonColour(hexagon, state);
-        }
-
-    }
-
-    private Polygon getHexById(String id) {
-        try {
-            Field field = getClass().getDeclaredField(id);
-            field.setAccessible(true);
-            return (Polygon) field.get(this);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    private HexState getHexState(Polygon hex) {
-        Paint fill = hex.getFill();
-        if (fill.equals(Color.RED)) return HexState.PLAYER1;
-        if (fill.equals(Color.BLUE)) return HexState.PLAYER2;
-        return HexState.OFF;
-    }
-
-    private void applyHexState(Polygon hex, HexState state) {
-        switch (state) {
-            case PLAYER1 -> hex.setFill(Color.RED);
-            case PLAYER2 -> hex.setFill(Color.BLUE);
-            default -> hex.setFill(Color.GREY);
-        }
-    }
-
-
-
-    private static HexagonState[] loadBoard() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
-            return (HexagonState[]) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
+            hexagon.setOnMouseEntered(event -> hexHoverHandler(event));
+            hexagon.setOnMouseExited(event -> hexExit(event));
         }
     }
 

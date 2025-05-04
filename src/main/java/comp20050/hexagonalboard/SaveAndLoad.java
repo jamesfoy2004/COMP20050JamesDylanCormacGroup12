@@ -7,12 +7,12 @@ import java.io.*;
 import java.util.List;
 
 /**
- * Utility class for saving and loading the state of a hexagonal board game.
+ * Utility class for saving and loading games.
  */
 public class SaveAndLoad {
 
     /**
-     * Saves the current board state to the specified save slot, only if it's Player One's turn.
+     * Saves the current board to the specified save slot, only if it's Player One's turn.
      *
      * @param hexagons the list of hexagon tiles
      * @param slot     the save slot number (1–4)
