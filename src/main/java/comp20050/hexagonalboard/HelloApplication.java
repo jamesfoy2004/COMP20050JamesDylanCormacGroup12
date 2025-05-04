@@ -1,12 +1,13 @@
 package comp20050.hexagonalboard;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.MenuButton;
 import javafx.animation.KeyFrame;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -18,10 +19,7 @@ import javafx.scene.transform.Scale;
 import javafx.util.Duration;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.MenuItem;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 public class HelloApplication extends Application {
@@ -29,107 +27,112 @@ public class HelloApplication extends Application {
     MenuButton menuButton;
 
     //red turn and blue turn pop-ups
-    Button redButton;
-    Button blueButton;
+    Button playerOneButton;
+    Button playerTwoButton;
 
     private List<Polygon> hexagons;
 
     //used for dictating how long a pop-up runs
-    private Timeline redTime;
-    private Timeline blueTime;
+    private Timeline playerOneTime;
+    private Timeline playerTwoTime;
 
+    private boolean isPlayerOneTurn = true;
 
-    private boolean isRedTurn = true;
-
-    public boolean isRedTurn() {
-        return isRedTurn;
+    public boolean isPlayerOneTurn() {
+        return isPlayerOneTurn;
     }
 
-    public void setRedTurn(boolean redTurn) {
-        isRedTurn = redTurn;
+    public void setPlayerOneTurn(boolean playerOneTurn) {
+        isPlayerOneTurn = playerOneTurn;
     }
 
     @Override
     public void start(Stage stage) throws IOException {
+//=======================================================FXML===========================================================
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/comp20050/hexagonalboard/hello-view.fxml"));
-        InputStream imageStream = getClass().getResourceAsStream("/comp20050/hexagonalboard/splash.png");
-        if (imageStream == null) {
-            throw new IOException("Splash image not found!");
-        }
-        Image image = new Image(imageStream);
-        ImageView imageView = new ImageView(image);
-        imageView.setFitWidth(800);
-        imageView.setFitHeight(700);
-        AnchorPane imagePane = new AnchorPane(imageView);
-        Scene imageScene = new Scene(imagePane, 800, 700);
 
-        stage.setScene(imageScene);
-        stage.show();
+//=======================================================Splash=========================================================
 
-        PauseTransition delay = new PauseTransition(Duration.seconds(3));
-        delay.setOnFinished(event -> loadMainScene(stage));
-        delay.play();
+        new SplashLoadingScreen().show(stage, isNewGame -> {
+            // This lambda will be triggered after the splash screen when the user clicks "New Game" or "Load Game"
+            if (isNewGame) {
+                // For a new game, you need to show the slot selection prompt
+                // (Note: the file names here will be used to represent the game saves)
+                // You can call the prompt to choose the slot, and once chosen, load the respective save.
+                promptForGameSlot(stage, true);
+            } else {
+                // For loading an existing game, the same slot prompt will appear
+                promptForGameSlot(stage, false);
+            }
+        });
+
     }
 
-    private void loadMainScene(Stage stage) {
+    private void promptForGameSlot(Stage stage, boolean isNewGame) {
+        // Create an Alert to ask the user for the save slot
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Select Saved Game");
+        alert.setHeaderText(isNewGame ? "Select a Save for New Game" : "Select a Save File to load");
+        alert.setContentText("Select a Save:");
+
+        // Create a GridPane to display buttons in a 2x2 grid
+        GridPane grid = new GridPane();
+        grid.setHgap(10);  // Horizontal gap between buttons
+        grid.setVgap(10);  // Vertical gap between buttons
+        grid.setAlignment(Pos.CENTER);  // Align the grid to the center
+
+        // Create the buttons for slots 1, 2, 3, and 4
+        Button slot1 = new Button("Slot 1");
+        Button slot2 = new Button("Slot 2");
+        Button slot3 = new Button("Slot 3");
+        Button slot4 = new Button("Slot 4");
+
+        // Add buttons to the grid
+        grid.add(slot1, 0, 0);  // Row 0, Column 0
+        grid.add(slot2, 1, 0);  // Row 0, Column 1
+        grid.add(slot3, 0, 1);  // Row 1, Column 0
+        grid.add(slot4, 1, 1);  // Row 1, Column 1
+
+        // Set the grid as the content of the alert
+        alert.getDialogPane().setContent(grid);
+
+        // Set action listeners for each button to load the respective game
+        slot1.setOnAction(e -> {
+            String fileName = "Save1.ser";
+            loadMainScene(stage, fileName);
+            alert.close(); // Close the alert after the selection
+        });
+        slot2.setOnAction(e -> {
+            String fileName = "Save2.ser";
+            loadMainScene(stage, fileName);
+            alert.close(); // Close the alert after the selection
+        });
+        slot3.setOnAction(e -> {
+            String fileName = "Save3.ser";
+            loadMainScene(stage, fileName);
+            alert.close(); // Close the alert after the selection
+        });
+        slot4.setOnAction(e -> {
+            String fileName = "Save4.ser";
+            loadMainScene(stage, fileName);
+            alert.close(); // Close the alert after the selection
+        });
+
+        // Show the alert and wait for the user to select a slot
+        alert.showAndWait();
+    }
+
+    private void loadMainScene(Stage stage, String filename) {
         try {
+            System.out.println(filename);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/comp20050/hexagonalboard/hello-view.fxml"));
-
-            quitButton = new Button("Quit");
-            quitButton.setStyle("-fx-background-color: yellow; -fx-text-fill: blue; -fx-border-color: red; -fx-border-style: solid; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
-            quitButton.setPrefHeight(200);
-            quitButton.setPrefWidth(400);
-            quitButton.setOnAction(event -> {
-                Alert alert = new Alert(AlertType.CONFIRMATION);
-                alert.setTitle("Quit Confirmation");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to quit?");
-                ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
-                if (result == ButtonType.OK) {
-                    stage.close();
-                }
-            });
-
-            menuButton = new MenuButton("Menu");
-            menuButton.setStyle("-fx-background-color: red;");
-            menuButton.setPrefHeight(100);
-            menuButton.setPrefWidth(200);
-            MenuItem newGame = new MenuItem("New Game");
-            MenuItem saveGame = new MenuItem("Save Game");
-            MenuItem loadGame = new MenuItem("Load Game");
-            MenuItem changeTheme = new MenuItem("Change Theme");
-            MenuItem quitMenuButton = new MenuItem("Quit");
-            newGame.setOnAction(event -> showMessage("New Game Selected"));
-
-            saveGame.setOnAction(event -> {
-                HelloController controller = fxmlLoader.getController();
-                controller.saveBoardState(); // You'll implement this
-                showMessage("Game Saved Successfully");
-            });
-
-            loadGame.setOnAction(event -> {
-                HelloController controller = fxmlLoader.getController();
-                controller.loadAndUpdateBoard(); // You'll implement this
-                showMessage("Game Loaded Successfully");
-            });
-
-            changeTheme.setOnAction(event -> showMessage("Change Theme Selected"));
-            quitMenuButton.setOnAction(event -> {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Quit Confirmation");
-                alert.setHeaderText(null);
-                alert.setContentText("Are you sure you want to quit?");
-                ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
-                if (result == ButtonType.OK) {
-                    stage.close();
-                }
-            });
-            menuButton.getItems().addAll(newGame, saveGame, loadGame, changeTheme, quitMenuButton);
-
             AnchorPane root = fxmlLoader.load();
-            root.getChildren().addAll(quitButton, menuButton);
-            AnchorPane.setLeftAnchor(quitButton, 0.0);
-            AnchorPane.setBottomAnchor(quitButton, 10.0);
+
+            DropDownMenu dropDownMenu = new DropDownMenu(stage, fxmlLoader);
+            menuButton = dropDownMenu.getMenuButton();
+            root.getChildren().add(menuButton);
+
             AnchorPane.setLeftAnchor(menuButton, 10.0);
             AnchorPane.setTopAnchor(menuButton, 10.0);
 
@@ -139,12 +142,12 @@ public class HelloApplication extends Application {
 
 
             //red pop-up
-            redButton = new Button();
-            redButton.setStyle("-fx-background-color: white; -fx-text-fill: black;  -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
-            redButton.setText(" : RED player's turn");
-            redButton.setPrefHeight(200);
-            redButton.setPrefWidth(500);
-            redButton.setVisible(false);
+            playerOneButton = new Button();
+            playerOneButton.setStyle("-fx-background-color: white; -fx-text-fill: black;  -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
+            playerOneButton.setText(" : RED player's turn");
+            playerOneButton.setPrefHeight(200);
+            playerOneButton.setPrefWidth(500);
+            playerOneButton.setVisible(false);
 
             //add red circle to pop-up
             Image image = new Image(getClass().getResourceAsStream("red.png"));
@@ -154,19 +157,19 @@ public class HelloApplication extends Application {
             iview.setFitHeight(50);
             iview.setPreserveRatio(true);
 
-            redButton.setGraphic(iview);
+            playerOneButton.setGraphic(iview);
 
-            root.getChildren().add(redButton);
-            AnchorPane.setLeftAnchor(redButton, 450.0);
-            AnchorPane.setTopAnchor(redButton, 600.0);
+            root.getChildren().add(playerOneButton);
+            AnchorPane.setLeftAnchor(playerOneButton, 450.0);
+            AnchorPane.setTopAnchor(playerOneButton, 600.0);
 
             //blue pop-up
-            blueButton = new Button();
-            blueButton.setStyle("-fx-background-color: white; -fx-text-fill: black;  -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
-            blueButton.setText(" : BLUE player's turn");
-            blueButton.setPrefHeight(200);
-            blueButton.setPrefWidth(500);
-            blueButton.setVisible(false);
+            playerTwoButton = new Button();
+            playerTwoButton.setStyle("-fx-background-color: white; -fx-text-fill: black;  -fx-border-style: none; -fx-background-radius: 30; -fx-border-width: 20; -fx-font-weight: bold; -fx-font-size: 32");
+            playerTwoButton.setText(" : BLUE player's turn");
+            playerTwoButton.setPrefHeight(200);
+            playerTwoButton.setPrefWidth(500);
+            playerTwoButton.setVisible(false);
 
             //add blue circle to pop-up
             Image imageBlue = new Image(getClass().getResourceAsStream("blue.png"));
@@ -176,23 +179,30 @@ public class HelloApplication extends Application {
             iviewBlue.setFitHeight(50);
             iviewBlue.setPreserveRatio(true);
 
-            blueButton.setGraphic(iviewBlue);
+            playerTwoButton.setGraphic(iviewBlue);
 
-            root.getChildren().add(blueButton);
-            AnchorPane.setLeftAnchor(blueButton, 450.0);
-            AnchorPane.setTopAnchor(blueButton, 600.0);
+            root.getChildren().add(playerTwoButton);
+            AnchorPane.setLeftAnchor(playerTwoButton, 450.0);
+            AnchorPane.setTopAnchor(playerTwoButton, 600.0);
 
 
             HelloController controller = fxmlLoader.getController();
             controller.setApp(this);
             hexagons = controller.getHexagons();
+            for (Polygon hex : hexagons) {
+                hex.setUserData(HexState.OFF); // Initial state
+                hex.setOnMouseClicked(event -> {
+                    playerTurn(hex); // this will assign the correct state
+                });
+
+            }
 
             //method which defines how long the pop-ups run
             makeTimeLines();
 
             //by default start game with red players turn
-            redTime.play();
-            redButton.setVisible(true);
+            playerOneTime.play();
+            playerOneButton.setVisible(true);
             for (Polygon hexagon : hexagons) {
                 hexagon.setDisable(true);
                 hexagon.setOpacity(0.5);
@@ -213,6 +223,16 @@ public class HelloApplication extends Application {
         }
     }
 
+    public void updateFillFromState(Polygon hex) {
+        HexState state = (HexState) hex.getUserData();
+        switch (state) {
+            case PLAYER1 -> hex.setFill(Color.RED);
+            case PLAYER2 -> hex.setFill(Color.BLUE);
+            default -> hex.setFill(Color.LIGHTGRAY);
+        }
+    }
+
+
     private void showMessage(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Menu Selection");
@@ -222,61 +242,63 @@ public class HelloApplication extends Application {
     }
 
     public void makeTimeLines(){
-        redTime = new Timeline(new KeyFrame(
+        playerOneTime = new Timeline(new KeyFrame(
                 Duration.seconds(2),
                 event ->{
                     for(Polygon hexagon : hexagons) {
                         hexagon.setDisable(false);
                         hexagon.setOpacity(1);
                     }
-                    redButton.setVisible(false);
+                    playerOneButton.setVisible(false);
                 }
         ));
 
-        blueTime = new Timeline(new KeyFrame(
+        playerTwoTime = new Timeline(new KeyFrame(
                 Duration.seconds(2),
                 eventBlue ->{
                     for(Polygon hexagon : hexagons) {
                         hexagon.setDisable(false);
                         hexagon.setOpacity(1);
                     }
-                    blueButton.setVisible(false);
+                    playerTwoButton.setVisible(false);
                 }
         ));
     }
 
     public void playerTurn(Polygon hexagon){
 
-        if(isRedTurn()){
-            RedPlayer(hexagon);
-            setRedTurn(false);
+        if(isPlayerOneTurn()){
+            PlayerOne(hexagon);
+            setPlayerOneTurn(false);
         }
         else{
-            BluePlayer(hexagon);
-            setRedTurn(true);
+            PlayerTwo(hexagon);
+            setPlayerOneTurn(true);
         }
     }
 
-    public void RedPlayer(Polygon hex){
+    public void PlayerOne(Polygon hex){
         //colour given hex red
         hex.setFill(Color.RED);
+        hex.setUserData(HexState.PLAYER1);
 
         //show BLUE TURN pop up
-        blueTime.play();
-        blueButton.setVisible(true);
+        playerTwoTime.play();
+        playerTwoButton.setVisible(true);
         for(Polygon hexagon : hexagons) {
             hexagon.setDisable(true);
             hexagon.setOpacity(0.5);
         }
     }
 
-    public void BluePlayer(Polygon hex){
+    public void PlayerTwo(Polygon hex){
         //colour given hex blue
         hex.setFill(Color.BLUE);
+        hex.setUserData(HexState.PLAYER2);
 
         //show RED TURN pop up
-        redTime.play();
-        redButton.setVisible(true);
+        playerOneTime.play();
+        playerOneButton.setVisible(true);
         for(Polygon hexagon : hexagons) {
             hexagon.setDisable(true);
             hexagon.setOpacity(0.5);
