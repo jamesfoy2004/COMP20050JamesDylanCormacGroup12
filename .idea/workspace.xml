@@ -9,10 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Moslty Commented">
+    <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Got it working now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,6 +249,9 @@
       <workItem from="1741651005413" duration="456000" />
       <workItem from="1743974297082" duration="702000" />
       <workItem from="1746379282162" duration="7149000" />
+      <workItem from="1746449523696" duration="85000" />
+      <workItem from="1746456639219" duration="1758000" />
+      <workItem from="1746458476095" duration="511000" />
     </task>
     <task id="LOCAL-00001" summary="Quit Button">
       <option name="closed" value="true" />
@@ -347,7 +349,23 @@
       <option name="project" value="LOCAL" />
       <updated>1746396020427</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="QUit Button Doesnt Work But Saving Does">
+      <option name="closed" value="true" />
+      <created>1746448468548</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1746448468548</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Got it working now">
+      <option name="closed" value="true" />
+      <created>1746448632718</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1746448632718</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -373,7 +391,9 @@
     <MESSAGE value="In progress code for (in)valid placements and (non)capturing." />
     <MESSAGE value="Completed Loading and Saving and UI is slghtly polished" />
     <MESSAGE value="Moslty Commented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moslty Commented" />
+    <MESSAGE value="QUit Button Doesnt Work But Saving Does" />
+    <MESSAGE value="Got it working now" />
+    <option name="LAST_COMMIT_MESSAGE" value="Got it working now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

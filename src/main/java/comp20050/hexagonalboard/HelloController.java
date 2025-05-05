@@ -336,14 +336,12 @@ public class HelloController {
         Node hover = (Node) event.getTarget();
 
         if (hover instanceof Polygon hexagon) {
-            checkValidity(hexagon);
 
+            boolean isValidMove = checkValidity(hexagon);
 
-            boolean validPlacement = (boolean) hexagon.getUserData();
-
-            if (validPlacement) {
+            if (isValidMove) {
                 hexHoverTick(event);
-            } else if (!validPlacement) {
+            } else if (!isValidMove) {
                 hexHoverX(event);
             }
         }
@@ -635,9 +633,9 @@ public class HelloController {
      * @param hexagon The hexagon that we want to validate.
      */
 
-    private void checkValidity(Polygon hexagon) {
-        boolean isValid = isValidNonCapturingMove(hexagon) || isValidCapturingMove(hexagon);
-        hexagon.setUserData(isValid);
+    private boolean checkValidity(Polygon hexagon) {
+        boolean isValidMove = isValidNonCapturingMove(hexagon) || isValidCapturingMove(hexagon);
+        return isValidMove;
     }
 
 
