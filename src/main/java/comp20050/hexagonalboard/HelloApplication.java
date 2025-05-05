@@ -27,13 +27,13 @@ public class HelloApplication extends Application {
     Button quitButton;
     VBox menuButton;
 
-    // Red turn and blue turn pop-ups
+    //Red turn and blue turn pop-ups
     Button playerOneButton;
     Button playerTwoButton;
 
     private List<Polygon> hexagons;
 
-    // Timelines used to control how long a pop-up is visible
+    //Timelines used to control how long a pop-up is visible
     private Timeline playerOneTime;
     private Timeline playerTwoTime;
 
