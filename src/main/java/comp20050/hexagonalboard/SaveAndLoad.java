@@ -38,7 +38,7 @@ public class SaveAndLoad {
      * @return an array of HexState objects representing the saved state, or null if not found
      */
     public static HexState[] loadBoardState(int slot) {
-        String filename = "Save" + slot + ".ser";
+        String filename = getSaveFileName(slot);
         File file = new File(filename);
 
         if (!file.exists()) {

@@ -39,7 +39,7 @@ public class SplashLoadingScreen {
 
             // Button actions
             playGameBtn.setOnAction(e -> afterSplash.accept(true));
-            quitGameBtn.setOnAction(e -> stage.close());
+            quitGameBtn.setOnAction(e -> afterSplash.accept(false));
 
             // Adding buttons to layout
             VBox menuBox = new VBox(20, playGameBtn, quitGameBtn);

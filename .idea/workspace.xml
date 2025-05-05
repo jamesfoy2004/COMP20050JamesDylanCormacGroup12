@@ -11,9 +11,8 @@
   <component name="ChangeListManager">
     <list default="true" id="d0552cf7-0f47-4591-8735-d2eea09a15ca" name="Changes" comment="Moslty Commented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HelloController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/HexState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SaveAndLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/comp20050/hexagonalboard/SplashLoadingScreen.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,23 +47,23 @@
     &quot;assignee&quot;: &quot;c0rm1&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git",
-    "accountId": "d511ccd3-7e34-41ea-ad84-2ab38736b951"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/jamesfoy2004/COMP20050JamesDylanCormacGroup12.git&quot;,
+    &quot;accountId&quot;: &quot;d511ccd3-7e34-41ea-ad84-2ab38736b951&quot;
   },
-  "recentNewPullRequestHead": {
-    "server": {
-      "useHttp": false,
-      "host": "github.com",
-      "port": null,
-      "suffix": null
+  &quot;recentNewPullRequestHead&quot;: {
+    &quot;server&quot;: {
+      &quot;useHttp&quot;: false,
+      &quot;host&quot;: &quot;github.com&quot;,
+      &quot;port&quot;: null,
+      &quot;suffix&quot;: null
     },
-    "owner": "jamesfoy2004",
-    "repository": "COMP20050JamesDylanCormacGroup12"
+    &quot;owner&quot;: &quot;jamesfoy2004&quot;,
+    &quot;repository&quot;: &quot;COMP20050JamesDylanCormacGroup12&quot;
   },
-  "editorReviewEnabled": false
-}]]></component>
+  &quot;editorReviewEnabled&quot;: false
+}</component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
