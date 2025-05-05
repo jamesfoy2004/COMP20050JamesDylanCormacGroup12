@@ -1,5 +1,6 @@
 package comp20050.hexagonalboard;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -39,7 +40,8 @@ public class SplashLoadingScreen {
 
             // Button actions
             playGameBtn.setOnAction(e -> afterSplash.accept(true));
-            quitGameBtn.setOnAction(e -> afterSplash.accept(false));
+            quitGameBtn.setOnAction(e -> Platform.exit());
+
 
             // Adding buttons to layout
             VBox menuBox = new VBox(20, playGameBtn, quitGameBtn);
