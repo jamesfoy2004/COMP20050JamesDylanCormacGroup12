@@ -495,9 +495,9 @@ public class HelloController {
      *
      * @param current The current hexagon being checked.
      * @param opponentColor The color of the opponent's stones.
-     * @param visited A list of already visited hexagons to avoid reprocessing.
+     * @param visited A list of already visited hexagons.
      * @param group The group of hexagons that can be captured.
-     * @return true if the group is fully surrounded (capturable); false otherwise.
+     * @return true if the group can be captured. If not, return false.
      */
 
     private boolean isCapturedGroup(Polygon current, Paint opponentColor, List<Polygon> visited, List<Polygon> group) {
